@@ -25,30 +25,38 @@ class Ui(QtGui.QWidget):
         self.setGeometry(200,300,400,500)
         self.show()
     
-    def exit_(self):
-        dialog=QtGui.QDialog(parent=self)
+    def dialogs(self):
+        self.dialog=QtGui.QDialog(parent=self)
+        self.dialog.setModal(True)
+        self.dialog.lbl = QtGui.QLabel("Jste si jsit ze chcete ukoncit aplikaci",parent= self.dialog)
+        self.dialog.lbl.resize(self.dialog.lbl.sizeHint())        
         
-        dialog.lbl = QtGui.QLabel("Jste si jsit ze chcete ukoncit aplikaci",parent= dialog)
-        dialog.lbl.resize(dialog.lbl.sizeHint())        
         
+        self.dialog.btn = QtGui.QPushButton("Ano",parent=self.dialog)
         
-        dialog.btn = QtGui.QPushButton("Ano",parent=dialog)
+        self.dialog.btn.resize(self.dialog.btn.sizeHint())
+        self.dialog.btn.clicked.connect(self.dialog.accept)
         
-        dialog.btn.resize(dialog.btn.sizeHint())
-        dialog.btn.clicked.connect(self.close)
+        self.dialog.btn1= QtGui.QPushButton("Ne",parent=self.dialog)
         
-        dialog.btn1= QtGui.QPushButton("Ne",parent=dialog)
-        
-        dialog.btn1.resize(dialog.btn1.sizeHint())
-        dialog.btn1.clicked.connect(dialog.close)
+        self.dialog.btn1.resize(self.dialog.btn1.sizeHint())
+        self.dialog.btn1.clicked.connect(self.dialog.reject)
         
         grid=QtGui.QGridLayout()
-        grid.addWidget(dialog.lbl,0,0,1,0)
-        grid.addWidget(dialog.btn,1,0)
-        grid.addWidget(dialog.btn1,1,1)
+        grid.addWidget(self.dialog.lbl,0,0,1,0)
+        grid.addWidget(self.dialog.btn,1,0)
+        grid.addWidget(self.dialog.btn1,1,1)
         
-        dialog.setLayout(grid)       
-        dialog.exec_()
+        self.dialog.setLayout(grid)
+        
+        
+    def exit_(self):
+            self.dialogs()
+            if self.dialog.exec_():
+                self.close()
+            else:
+                self.dialog.close()
+            
         
 if __name__=="__main__":
     app= QtGui.QApplication(sys.argv)

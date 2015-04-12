@@ -1,0 +1,179 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Dialog &mdash; PyQt4 2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="PyQt4 2.0 documentation" href="index.html" />
+    <link rel="next" title="Logik" href="Logik.html" />
+    <link rel="prev" title="Slider" href="Slider.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Logik.html" title="Logik"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Slider.html" title="Slider"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">PyQt4 2.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="dialog">
+<h1>Dialog<a class="headerlink" href="#dialog" title="Permalink to this headline">¶</a></h1>
+<p>Nyní si ukážeme jak vytvářet dialogy mezi uživatelem a progrramem. Dialogy se vyplatí použivat na místech, kde potřebujeme upoutat pozornost uživatele na nějakou důležitou událost, například uzavření aplikace bez uložení vytvořeného obsahu. V PyQt jsou již předchystány standardní dialogy, ale mi si ukážeme jak vytvořit univerzální dialog pomocí QDialog.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">PyQt4</span> <span class="kn">import</span> <span class="n">QtGui</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">class</span> <span class="nc">Ui</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QWidget</span><span class="p">):</span>
+   <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="nb">super</span><span class="p">(</span><span class="n">Ui</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+   <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">btn</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="s">&quot;Exit&quot;</span><span class="p">,</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">btn</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">)</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">btn</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">btn</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">())</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">btn</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exit_</span><span class="p">)</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="mi">400</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Na začátku si vytvoříme jednoduché okno, které bude obsahovat tlačítko, které bude pří kliknutí otevírat dialog, o tom jestli si je uživatel jistý, že chce vypnout aplikaci. Poté již nastavíme oknu rozměr a zobrazíme toto okno.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">exit_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+   <span class="bp">self</span><span class="o">.</span><span class="n">create_dialog</span><span class="p">()</span>
+   <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">exec_</span><span class="p">():</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+   <span class="k">else</span><span class="p">:</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Při zavolání metody <a href="#id1"><span class="problematic" id="id2">exit_</span></a> se vytvoří metodou create_dialog() dialogové okno s názvem dialog. Z dialogu získáme návratovou hodnotu funkcí <a href="#id3"><span class="problematic" id="id4">exec_</span></a> tato funkce může navracet hodnoty Accepted, což je logická jednička, nebo Rejected, což je logická nuda, nebo nějakou jinou hodnotu, například číslo zadané v dialogu uživatelem. V našem případě navrací tato metoda hodnotu Accepted, pokud si uživatel přeje okno vypnout, nebo Rejected, kdy se rozhodl okno nevypínat. Pří návratu Accepted, okno zavíráme pomocí metody close(). Při návratu hodnoty Rejected zavíráme tou samou metodou dialog.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">create_dialog</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="o">=</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QDialog</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">setModal</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">lbl</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="s">&quot;Jste si jsit ze chcete ukoncit aplikaci&quot;</span><span class="p">,</span><span class="n">parent</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="p">)</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">())</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">btn</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="s">&quot;Ano&quot;</span><span class="p">,</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="p">)</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">btn</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">btn</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">())</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">btn</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">accept</span><span class="p">)</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">btn1</span><span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="s">&quot;Ne&quot;</span><span class="p">,</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="p">)</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">btn1</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">btn1</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">())</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">btn1</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">reject</span><span class="p">)</span>
+       <span class="n">grid</span><span class="o">=</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QGridLayout</span><span class="p">()</span>
+       <span class="n">grid</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">lbl</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+       <span class="n">grid</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">btn</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+       <span class="n">grid</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">btn1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>V metodě create_dialog si vytvoříme dialog pomocí konstruktoru QtGui.QDialog(parent), pokud nastavíme rodiče jako naše hlavní okno zobrazí se dialog nad naším hlavním okno. Pokud bychom toto neučinili museli bychom nastavi, kde chceme dialog zobrazi. Dialog funguje jako jakékoliv jiné okno, proto do něj můžeme přidávat ostatní widgety. Proto si vytvroříme label se zpravou pro uživatele a dvě tlačítka, která budou mít text „Ano“/„Ne“. Pokud stiskne uživatel tlačítko „Ano“, zavolá se slot dialog.accept, který nastaví návratovou hodnotu na hodnotu Accepted. Podobně navážeme tlačítko „Ne“ na slot dialog.reject, který nastaví návratovou hodnotu na Rejected. Poté vytvoříme rozvržení a metodou setLayout toto rozvržení nastavíme jako rozvžení dialogu. A tímto máme celou aplikaci funkční. Nyní si ukážeme ostatní důležité metody související s QDialog.</p>
+<ul class="simple">
+<li><strong>dialog.reject()</strong><ul>
+<li>schová dialogové okno a nastaví návratovou hodnotu na Rejected</li>
+</ul>
+</li>
+<li><strong>dialog.accept()</strong><ul>
+<li>schová dialogové ono a nastaví návratovou hodnotu na Accepted</li>
+</ul>
+</li>
+<li><strong>dialog.done(int r)</strong><ul>
+<li>zavře dialog a nastaví návratovou hodnotu na r, tato hodnota je navrácena metodou <a href="#id5"><span class="problematic" id="id6">exec_</span></a></li>
+</ul>
+</li>
+<li><strong>dialog.exec_()</strong><ul>
+<li>zobrazí dialog a posléze navrátí návratovou hodnotu.</li>
+</ul>
+</li>
+<li><strong>dialog.setResult(int result)</strong><ul>
+<li>nastaví návratovou hodnotu na result, tato metoda se hodí pokud potřebujeme navracet z dialogu více hodnot.</li>
+</ul>
+</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Slider.html"
+                        title="previous chapter">Slider</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Logik.html"
+                        title="next chapter">Logik</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/Dialog.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Logik.html" title="Logik"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Slider.html" title="Slider"
+             >previous</a> |</li>
+        <li><a href="index.html">PyQt4 2.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Adam Obrtel.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

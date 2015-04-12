@@ -1,0 +1,197 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Rozvržení &mdash; PyQt4 2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="PyQt4 2.0 documentation" href="index.html" />
+    <link rel="next" title="PushButton" href="PushButton.html" />
+    <link rel="prev" title="Vytvoření okna" href="Okno.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="PushButton.html" title="PushButton"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Okno.html" title="Vytvoření okna"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">PyQt4 2.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="rozvrzeni">
+<h1>Rozvržení<a class="headerlink" href="#rozvrzeni" title="Permalink to this headline">¶</a></h1>
+<p>Rozvržení je velmi užitečná věc. Ta nám umožňuje vytvořit dobře vypadající grafické rozhraní bez velké práce. V PyQt4 existují dva manažery rozvržení, což jsou Grid a BoxLayout. Nyní se podíváme jak je vytvořit.</p>
+<div class="section" id="grid">
+<h2>Grid<a class="headerlink" href="#grid" title="Permalink to this headline">¶</a></h2>
+<p>Grid je jeden z nejvíce užívaných rozvržení a to díky své jednoduchosti.
+Pracuje na základě sloupců a řádků do kterých umísťuje widgety. Díky této vlastnosti
+je pro programátora velmi snadné si představit jak bude výsledný program vypadat.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">PyQt4</span> <span class="kn">import</span> <span class="n">QtGui</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">class</span> <span class="nc">Ui</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QWidget</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="nb">super</span><span class="p">(</span><span class="n">Ui</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+        <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="n">cisla</span><span class="o">=</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">17</span><span class="p">))</span>
+                <span class="n">pozice</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+                <span class="n">grid</span><span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QGridLayout</span><span class="p">()</span>
+                <span class="n">j</span><span class="o">=</span><span class="mi">0</span>
+</pre></div>
+</div>
+<p>První část kódu je stejná jako v prvním příkladu. Zajímavé věci se dějí až při vytváření pole čísla, které obsahuje po sobě jdoucí čísla v podobě řetězce.
+Je důležité, aby tyto čísla byla v řetězci, neboť jak si později ukážeme, tlačítka nejsou schopna přijmout čísla do svého názvu. Poté vytvoříme objekt grid za pomocí konstruktoru QGridLayout().</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">cisla</span><span class="p">:</span>
+        <span class="n">button</span><span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">grid</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="n">pozice</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">pozice</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">j</span><span class="o">+=</span><span class="mi">1</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">300</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>V cyklu for vytvoříme tlačítka, která umístíme pomocí metody addWidget (objekt, řádek, sloupec) do našeho rozvržení grid.
+Poté inkrementujeme j o jedna. Tato proměnná nám určuje počet již vytvořených tlačítek. Vytvoření tlačítek tímto způsobem je
+velmi výhodné, protože zpřehledňuje kód. Dále nastavíme našemu hlavnímu oknu rozvržení metodou setLayout(rozvržení) a potom jako obvykle okno zobrazíme.</p>
+<img alt="_images/Grid.png" src="_images/Grid.png" />
+</div>
+<div class="section" id="boxlayout">
+<h2>BoxLayout<a class="headerlink" href="#boxlayout" title="Permalink to this headline">¶</a></h2>
+<p>Toto rozvržení je velmi užitečné, neboť graficky rozdělí widgety do logických skupin. Tato vlastnost je zejména využitelná pro widgety jako checkBox nebo RadioButton. Existují dva typy boyLayout a to vertikální a
+horizontální. Oba si nyní představíme.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">PyQt4</span> <span class="kn">import</span> <span class="n">QtGui</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">class</span> <span class="nc">Ui</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QWidget</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="nb">super</span><span class="p">(</span><span class="n">Ui</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+        <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="n">btn_ok_hor</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="s">&quot;ok&quot;</span><span class="p">,)</span>
+                <span class="n">btn_ok_hor</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="s">&quot;cancel&quot;</span><span class="p">,)</span>
+                <span class="n">hbox</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QHBoxLayout</span><span class="p">()</span>
+                <span class="n">hbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">btn_ok_hor</span><span class="p">)</span>
+                <span class="n">hbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">btn_cancel_hor</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>První část kódu je stejná jako v předchozích příkladech a proto se jí nebudeme zabývat. Jako první si vytvoříme btn_ok_hor a btn_ok_hor za pomocí
+kostruktoru QPushButton(text). Blíže si povíme o tlačítkách v příštím příkladu. Poté vytváříme za pomoci kostruktoru QHBoxLayout objekt hbox. Do tohoto rozvržení nasledně
+umístíme naše tlačítka pomocí metody addWidget(objekt).</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">btn_ok_ver</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="s">&quot;ok&quot;</span><span class="p">,)</span>
+<span class="n">btn_cancel_ver</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="s">&quot;cancel&quot;</span><span class="p">,)</span>
+<span class="n">vbox</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QVBoxLayout</span><span class="p">()</span>
+<span class="n">vbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">btn_ok_ver</span><span class="p">)</span>
+<span class="n">vbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">btn_cancel_ver</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Stejně jako pro HBoxLayout vytvoříme dvě tlačítka, která poté přidáme za pomocí metody addWidget do našeho rozvržení.
+Zde jde krásně vidět, jak si jsou VBoxLayout a HBoxLayout podobné, neboť podporují podobné metody.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">grid</span><span class="o">=</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QGridLayout</span><span class="p">()</span>
+<span class="n">grid</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">vbox</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">grid</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">hbox</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">300</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>V poslední části kódu si vytvoříme objekt grid, který je vytvořen konstruktorem QGridLayout. Do tohoto rozvržení potom umístíme hbox a vbox pomocí metody addLayout(rozvržení). Toto je nutné, neboť bychom nebyli schopni nastavit rozvržení pro hlavní okno, jelikož okno může mít pouze jedno rozvržení. Jako obvykle musíme okno zobrazit.</p>
+<img alt="_images/BoxLayout.png" src="_images/BoxLayout.png" />
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Rozvržení</a><ul>
+<li><a class="reference internal" href="#grid">Grid</a></li>
+<li><a class="reference internal" href="#boxlayout">BoxLayout</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Okno.html"
+                        title="previous chapter">Vytvoření okna</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="PushButton.html"
+                        title="next chapter">PushButton</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/Grid.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="PushButton.html" title="PushButton"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Okno.html" title="Vytvoření okna"
+             >previous</a> |</li>
+        <li><a href="index.html">PyQt4 2.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Adam Obrtel.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
