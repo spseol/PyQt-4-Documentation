@@ -5,19 +5,7 @@ Created on Mon Dec 01 21:19:09 2014
 @author: Adam
 """
 
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 
-"""
-ZetCode PyQt4 tutorial 
-
-In the example, we draw randomly 1000 red points 
-on the window.
-
-author: Jan Bodnar
-website: zetcode.com 
-last edited: September 2011
-"""
 
 import sys
 from PyQt4 import QtGui, QtCore
@@ -35,7 +23,7 @@ class Drawing(QtGui.QWidget):
          self.show()
     
     
-    def paintEvent(self,e):
+    def paintEvent(self, e):
         self.painter=QtGui.QPainter()
         self.painter.begin(self)
         self.draw()
@@ -85,7 +73,6 @@ class Drawing(QtGui.QWidget):
 
         self.painter.setBrush(QtGui.QColor(0, 0, 255,))
         self.painter.drawRect(250, 130, 90, 60)
-        self.painter.drawEllipse(130,200,90,60)
     
 def main():
     
