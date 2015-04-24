@@ -69,13 +69,13 @@ class Ui(QtGui.QWidget,):
     def registrace(self):
         
         okenko=popup()
-        self.dict= okenko.dict
+        self.dict[okenko.line_name.text()]= okenko.line_pass.text()
         
     
 class popup(QtGui.QDialog,):
     def __init__(self):
         super(popup,self).__init__()
-        self.dict = {}
+        
         self.setup()
     
     def setup(self,):
@@ -93,7 +93,7 @@ class popup(QtGui.QDialog,):
         self.btn_potvrdit = QtGui.QPushButton("potvrdit",parent=self)
         
         self.btn_potvrdit.resize(self.btn_potvrdit.sizeHint())
-        self.btn_potvrdit.clicked.connect(self.registrace)
+        self.btn_potvrdit.clicked.connect(self.close)
         
         grid=QtGui.QGridLayout()
         grid.addWidget(self.line_name,0,0,1,0)
@@ -104,9 +104,7 @@ class popup(QtGui.QDialog,):
         self.exec_()
         
         
-    def registrace(self):
-        self.dict[self.line_name.text()]= self.line_pass.text()
-        self.close()
+    
         
     
 if __name__=="__main__":

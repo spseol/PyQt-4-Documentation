@@ -1,0 +1,153 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>CheckBox &mdash; PyQt4 2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="PyQt4 2.0 documentation" href="index.html" />
+    <link rel="next" title="RadioButton" href="RadioButton.html" />
+    <link rel="prev" title="Label" href="Labe.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="RadioButton.html" title="RadioButton"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Labe.html" title="Label"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">PyQt4 2.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="checkbox">
+<h1>CheckBox<a class="headerlink" href="#checkbox" title="Permalink to this headline">¶</a></h1>
+<p>CheckBox je velmi užitečný widget. Využívá se zejména pro zjištění, zdali si uživatel přečetl licenční podmínky nebo zjištění dvou a více informaci, které mohou nastat společně.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">PyQt4</span> <span class="kn">import</span> <span class="n">QtGui</span><span class="p">,</span><span class="n">QtCore</span>
+<span class="k">class</span> <span class="nc">Main_Window</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QWidget</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="nb">super</span><span class="p">(</span><span class="n">Main_Window</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setup_ui</span><span class="p">()</span>
+        <span class="k">def</span> <span class="nf">setup_ui</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">chk_box</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QCheckBox</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">chk_box</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;potvrdte&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">=</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">btn</span><span class="o">=</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="s">&quot;kliknete&quot;</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">btn</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chk_state</span><span class="p">)</span>
+        <span class="n">btn</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">btn</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>První část textu zůstává jako obvykle stejná. V metodě setup_ui si jako první vytvoříme objekt chk_box pomocí konstruktoru QCheckBox(rodič).
+Poté nastavíme text, který se bude zobrazovat vedle widgetu pomocí metody setText(“text“). Pro zobrazení výzvy pro uživatele si vytvoříme jako v
+předchozím lbl objekt. Následně vytvoříme tlačítko s vazbou na metodu self.chk_state.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">grid</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QGridLayout</span><span class="p">()</span>
+<span class="n">grid</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">grid</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chk_box</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">grid</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="s">&quot;chk_box&quot;</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Poslední část kódu je totožná, jako v předchozích příkladech.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">chk_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">chk_box</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;klikl jste&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;potvrdte tlacitko&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Metoda chk_state obsahuje jednoduchou podmínku, ve které se ptáme stejně, jako v předchozím příkladu na stav widgetu. Dále podle stavu nastavíme odpovídající odpověď.</p>
+<img alt="_images/CheckBox.png" src="_images/CheckBox.png" />
+<img alt="_images/CheckBox-klik.png" src="_images/CheckBox-klik.png" />
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Labe.html"
+                        title="previous chapter">Label</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="RadioButton.html"
+                        title="next chapter">RadioButton</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/CheckBox.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="RadioButton.html" title="RadioButton"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Labe.html" title="Label"
+             >previous</a> |</li>
+        <li><a href="index.html">PyQt4 2.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Adam Obrtel.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
