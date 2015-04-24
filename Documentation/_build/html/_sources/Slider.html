@@ -1,0 +1,183 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Slider &mdash; PyQt4 2.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="PyQt4 2.0 documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../index.html">PyQt4 2.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="slider">
+<h1>Slider<a class="headerlink" href="#slider" title="Permalink to this headline">¶</a></h1>
+<p>V této kapitole si ukážeme, velmi užitečný  grafický prvek zvaný slider. Tento prvek se hodí k zadávání hodnot z souvislého intervalu a také tam, kde potřebujeme okamžitou odezvu. Toho předurčuje jako vhodný widget pro práci s barvami nebo pro nastavovaní rychlosti myšy. Mimo jiné si v této kapitole ukážeme jak jde efektivně detekovat místo na kterém chceme vykreslit určitý objekt.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">PyQt4</span> <span class="kn">import</span> <span class="n">QtGui</span><span class="p">,</span><span class="n">QtCore</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">class</span> <span class="nc">changer</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QWidget</span><span class="p">):</span>
+   <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="nb">super</span><span class="p">(</span><span class="n">changer</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">painter</span><span class="o">=</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QPainter</span><span class="p">()</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+
+   <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">=</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QGridLayout</span><span class="p">()</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="o">=</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QSpacerItem</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">50</span><span class="p">,)</span>
+
+       <span class="bp">self</span><span class="o">.</span><span class="n">red</span><span class="o">=</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">red</span><span class="o">.</span><span class="n">setNum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">red</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+
+       <span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="o">=</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="o">.</span><span class="n">setNum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+
+       <span class="bp">self</span><span class="o">.</span><span class="n">green</span><span class="o">=</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">green</span><span class="o">.</span><span class="n">setNum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">green</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>První část kódu je klasické importování knihoven a nastavení potřebných nezbytností. První důležitou věcí, které je dobré si všimnout, je vytvoření spaceru. Spacer je neviditelná widget, který nám umožnuje vytvořit rozestup o požadované velikosti mezi widgety. V našem případě ho používáme proto, abychom byli schopni kreslit na předem určené místo. Poté si vytvoříme tři label widgety, které nám budou ukazovat aktualní hodnoty slideru. Toto je důležité, neboť samotná slider nemá žádnou grafickou indikaci hodnoty.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="bp">self</span><span class="o">.</span><span class="n">slider</span><span class="o">=</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QSlider</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">slider</span><span class="o">.</span><span class="n">setMaximum</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">slider</span><span class="o">.</span><span class="n">setMinimum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">slider</span><span class="o">.</span><span class="n">valueChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">paintEvent</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">slider</span><span class="o">.</span><span class="n">valueChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">red</span><span class="o">.</span><span class="n">setNum</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">slider2</span><span class="o">=</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QSlider</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">slider2</span><span class="o">.</span><span class="n">setMaximum</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">slider2</span><span class="o">.</span><span class="n">setMinimum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">slider2</span><span class="o">.</span><span class="n">valueChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">paintEvent</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">slider2</span><span class="o">.</span><span class="n">valueChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">green</span><span class="o">.</span><span class="n">setNum</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">slider3</span><span class="o">=</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QSlider</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">slider3</span><span class="o">.</span><span class="n">setMaximum</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">slider3</span><span class="o">.</span><span class="n">setMinimum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">slider3</span><span class="o">.</span><span class="n">valueChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">paintEvent</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">slider3</span><span class="o">.</span><span class="n">valueChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="o">.</span><span class="n">setNum</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Nyní si vytvoříme naše tři slidery a to pomocí třídy QSlider, poté pomocí metody setMaximum nastavíme horní mez intervalu. Podbně nastavíme i hodnotu dolní meze a to metodou setMinimum. Obě tyto metody příjmaji celo číselné hodnoty. Pomocí signálu valueChanged, který se provede při zmněně hodnoty slideru, napojíme dva sloty a to self.paintEvent, který nám zajistí přebarvení obdelníku na danou rgb hodnotu, a self.label.setNum, který nám zajistí zmněnu hodnoty label dané barvy na aktuální hodnotu slideru. Tímto způsobem vytvoříme všechny tři slidery.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">slider</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">slider2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">slider3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QSpacerItem</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QSpacerItem</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Zde si všechny widgety dáme do rozvžení, které jsme si na žačátku vytvoříly a toto rozvržení nastvíme jako hlavní rozvržení okna.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">e</span><span class="p">):</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">painter</span><span class="o">.</span><span class="n">begin</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+       <span class="n">pen</span><span class="o">=</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QPen</span><span class="p">()</span>
+       <span class="n">pen</span><span class="o">.</span><span class="n">setStyle</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">NoPen</span><span class="p">)</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">pen</span><span class="p">)</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">slider</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span><span class="bp">self</span><span class="o">.</span><span class="n">slider2</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span><span class="bp">self</span><span class="o">.</span><span class="n">slider3</span><span class="o">.</span><span class="n">value</span><span class="p">()))</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">painter</span><span class="o">.</span><span class="n">drawRect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">geometry</span><span class="p">())</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">painter</span><span class="o">.</span><span class="n">end</span><span class="p">()</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Podobně jako v minulé kapitole si reimplementujeme metodu paintEvent v ní začneme kreslení metodou self.painter.begin. Poté si vytvoříme pero, které bude neviditelné a předáme ho painteru. To nám zajistí, že vytvořený obdelník nebude mít rámeček. Poté si nastavíme štětec s barvou. Barvu nastavíme třídou QtGui.QColor. Parametry této metody jsou hodnoty ze slideru v pořadí červená, zelená a modrá. Díky použití metody paintEvent se nám obdelník vytvoří již s oknem a nemusíme čekat na to, až užívatel potáhne sliderem. Nyní si ukážeme, přehled užitečných metod a signálů pro práci se sliderem.</p>
+<ul class="simple">
+<li><strong>setMinimum(int min)</strong><ul>
+<li>Nastaví nejmenší možnou hodnotu slideru.</li>
+</ul>
+</li>
+<li><strong>setMaximum(int min)</strong><ul>
+<li>Nastaví největší možnou hodnotu slideru.</li>
+</ul>
+</li>
+<li><strong>setValue(int value)</strong><ul>
+<li>Nastaví slider na hodnotu v rozsahu od minima po maximum. Hodí se pro první nastavení hodnoty, třeba na často vybíranou hodnotu.</li>
+</ul>
+</li>
+<li><strong>setSingleStep(int value)</strong><ul>
+<li>nastaví hodnotu o kterou se při jednom kroku změní hodnota slideru.</li>
+</ul>
+</li>
+<li><strong>setRange(int min,int max)</strong><ul>
+<li>Nastaví rozsah pro slider, funguje stejně jako setMinimum a setMaximum.</li>
+</ul>
+</li>
+</ul>
+<img alt="_sources\16.png" src="_sources\16.png" />
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/Slider.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../index.html">PyQt4 2.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Adam Obrtel.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

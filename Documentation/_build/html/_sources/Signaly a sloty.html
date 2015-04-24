@@ -1,0 +1,274 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Signály a sloty &mdash; PyQt4 2.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="PyQt4 2.0 documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../index.html">PyQt4 2.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="signaly-a-sloty">
+<h1>Signály a sloty<a class="headerlink" href="#signaly-a-sloty" title="Permalink to this headline">¶</a></h1>
+<p>V této kapitole se budeme zabývat velmi důležitou mechanikou knihovny PyQt4 a to signály a sloty. Tato mechanika slouží pro zachicení událostí a na základě  nich provedení požadovaných operací.</p>
+<p>Oproti jiným knihovnám pro grafické rozhraní je PyQt výjmečné použitím signálu a slotů. Rozdíl oproti callback funkcím v jiných knihovnách musí mít signál i slot stejnou návratovou hodnotu. Toto je důležité v Qt, jehož je PyQt nástavbou, ale v PyQt se tím prakticky nemusíme zabývat, neboť Python nemá jako jiné jazyky pevně stanovenou navratovou hodnotu funkce.</p>
+<div class="section" id="signaly">
+<h2>Signály<a class="headerlink" href="#signaly" title="Permalink to this headline">¶</a></h2>
+<p>Signál je vyvolán při každé událostí, způsobené uživatelem nebo nějakým pro nás zajmavým jevem. Například výpadek připojení k internetu nebo stisknutí tlačítka.  Po vyvovolání  signálu jsou vykonány sloty, pokud je k jednomu signálu připojeno více slotů jsou sloty prováděny postupně v pořadí v jakém byli připojeny k signálu.</p>
+<p>V Pyqt je nám k dispozici velké mmožství přednastavených signálu, s těmito signály si ve většině případů vystačíme, ale máme možnost si vytvořit vlasní signal. Užitečné signály obsažené v Pyqt4 jsou.</p>
+<ul class="simple">
+<li><strong>widget.clicked</strong><ul>
+<li>pokud bylo kliknuto na widget, spustí se přiřazený slot, použití zejména pro QButton, ale lze použít i na ostatní widgety.</li>
+</ul>
+</li>
+<li><strong>widget.released</strong><ul>
+<li>pokud bylo po kliknutí na widget uvolněno tlačítko, spustí se přířazený slot, použití zejména pro QButton, ale lze použít i na ostatní widgety.</li>
+</ul>
+</li>
+<li><strong>widget.pressed</strong><ul>
+<li>pokud bylo kliknuto na widget, spustí se přířazený slot, použití zejména pro QButton, ale lze použít i na ostatní widgety</li>
+</ul>
+</li>
+<li><strong>widget.valueChanged</strong><ul>
+<li>použití pro QSpinBox nebo QSlider, pokud se změní hodnota widgetu, spustí se přiřazený slot.</li>
+</ul>
+</li>
+<li><strong>widget.stateChanged</strong><ul>
+<li>použití pro QCheckBox, pokud se změní stav, spustí se přiřazený slot. Změna stavu znamená přepnutí QCheckBoxu.</li>
+</ul>
+</li>
+<li><strong>widget.textChanged</strong><ul>
+<li>použití pro QLineEdit, pokud se změní text, spustí se přiřazený slot.</li>
+</ul>
+</li>
+</ul>
+<p>Neboť by bylo zdlouhavé vypisovat všechny signály v knihovně PyQt, existuje způsob jak zjistit všechny signály pro jednotlivé widgety a to pomocí skriptu, který vypíše všechny signály do
+textového souboru s názvem widgetu, který k danému slotu náleží. Poté je již snadné si daný signál prostudovat v oficiální dokumentaci PyQt.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">PyQt4</span> <span class="kn">import</span> <span class="n">QtGui</span><span class="p">,</span> <span class="n">QtCore</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;kwan.txt&quot;</span><span class="p">,</span><span class="s">&quot;w&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">QtGui</span><span class="p">):</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">QtGui</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isclass</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">name2</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+                        <span class="n">obj2</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name2</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj2</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">pyqtSignal</span><span class="p">):</span>
+                                <span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">+</span><span class="s">&quot; &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">name2</span><span class="p">)</span><span class="o">+</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="vazani-signalu">
+<h3>Vázání signálů<a class="headerlink" href="#vazani-signalu" title="Permalink to this headline">¶</a></h3>
+<p>Poté co jsme si řekli, co to jsou signály, je důležité se naučit
+jak tyto signály napojit na widgety a tím vytvořit vazby,
+které umožní uživateli komunikovat s naší aplikací. V PyQt4 jsou dvě možností
+jak tyto vazby vytvářet a to „nový“ a „starý“ styl. Jediný rozdíl mezi těmito styly je v tom,
+že nový styl je více pythonovější  a také je kratší na zápis. A nyní si ukážeme jak tyto vazby vytvořit.</p>
+</div>
+<div class="section" id="stary-styl">
+<h3>Starý styl<a class="headerlink" href="#stary-styl" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>slider=QtGui.QSlider()
+QtCore.QObject.connect(slider, QtCore.SIGNAL(“valueChanged()“), change)
+def change(num):
+        print “slider ma hodnotu “, num</pre>
+</div>
+<p>V tom to příkladu na vytvoření vazby si vytvoříme slider, které napojíme pomocí metody connect, která se nachází ve třídě QtCore.QObject. Tato metoda příjmá jako argumenty widget, který ma vytvořit vazbu, signál, který ma danou vazbu vytvořit. Signál musí být specifikován metodou SIGNAL,tato metoda příjma text s názvem signálu. A posledním parametrem metody connect je funkce, která se zavolá po provedení daného signálu. Je dobré si všimnout toho, že signál posíla při změně hodnoty tuto změněnou hodnotu našemu slotu.</p>
+<p>Metoda connect má několik možných signatur, které se pouze drobně liší. Tyto signatůry si nyní blíže představíme.</p>
+<ul class="simple">
+<li><strong>connect(sender,SIGNAL(),receiver,SLOT())</strong><ul>
+<li>Vytvoří vazbu mezi widgetem sender a widgetem receiver. Duležité je, že SLOT musí náležet widgetu receiver. Tato signatůra se hodí například pro vytvoření Slideru, jehož hodnota se bude zobrazovat v Label.</li>
+</ul>
+</li>
+<li><strong>connect(sender,SIGNAL(),callable)</strong><ul>
+<li>Podobně jako předchozí signatůra vytvoří vazbu z widgetu sender signálem na slot se jmenem callable. Callable je jakákoliv funkce nebo methoda v Pythonu.</li>
+</ul>
+</li>
+<li><strong>connect(sender,SIGNAL(),SLOT())</strong><ul>
+<li>Zkrácený zapís pro connect(sender,SIGNAL(),self,SLOT()). To znamená, že vytvoří vazbu na naše okno a nena nějaký blíže specifikovaný widget.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="novy-styl">
+<h3>Nový styl<a class="headerlink" href="#novy-styl" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>slider=QtGui.QSlider()
+slider.valueChanged.connect(change)
+
+def change(num):
+ print “hodnota slideru je “, num</pre>
+</div>
+<p>Podobně jako v minulém příkladu si vytvoříme slider, z kterého vedeme vazbu na slot change. Jak je jistě patrné tento způsob je přehlednější, lépe čitelný a také se více podobá syntaxi Pythonu. Celá vazba vzniká zavoláním signálu valueChanged na slider a připojení pomocí metody connect, která příjmá pythonovkskou funkci.</p>
+</div>
+<div class="section" id="vytvareni-signalu">
+<h3>Vytváření signálů<a class="headerlink" href="#vytvareni-signalu" title="Permalink to this headline">¶</a></h3>
+<p>Přesto, že PyQt obsahuje obsáhlou sbírku již vytvořených signálu, tak se někdy hodí si vytvořit vlastní signál se
+specifickými parametry, které přesně splňují naše požadavky. Vlastní signály jsou zejména užitečné pro námi vytvořené widgety.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Ui</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QWidget</span><span class="p">,</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">,):</span>
+        <span class="n">right</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">pyqtSignal</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+        <span class="n">left</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">pyqtSignal</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="nb">super</span><span class="p">(</span><span class="n">Ui</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Jako první si vytvoříme třídu reprezentující naše grafické rozhraní. V promněné right si vytvoříme signál, který bude
+odesílat textovou hodnotu. Stejným způsobem vytvoříme i druhý signála left. Je důležité si všimnout, že signály definujeme v
+těle třídy a ne v metodě. A také toho, že signály by mněli být vytvářeny pouze ve třídách dědících z QtCore.QObject.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+   <span class="bp">self</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+   <span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="o">=</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+   <span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+   <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+   <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+   <span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>V této části si nastavíme velikost okna a vytvoříme Label do,
+kterého posléze budeme zapisovat, zda byl porveden náš signál. Poté si
+vytvoříme dvě vazby na slot self.text, a to za pomoci naších signálů. Na
+tom to je také dobře vidět, že slot může obsluhovat více signálů.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">e</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">keyPressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">e</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">key</span><span class="p">()</span><span class="o">==</span> <span class="mi">65</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="s">&quot;right&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">key</span><span class="p">()</span><span class="o">==</span> <span class="mi">67</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="s">&quot;left&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Nyní se dostáváme, k nejdůležitější častí kódu, a to z toho důvodu, že nám umožní spustit náš signál. V metodě text změníme text naší Label. Nejdůlžitější metodou celého kódu je keyPressEvent a to z důvodu, že se spustí při každém zmáčknutí tlačítka. Toto tlačítko můžeme zjistit pomocí parametru e na který zavoláme metodu key, která nám vrátí číslo tlačítka, které spustilo tuto metodu. Díky tomuto si můžeme určit při jakém stisknutí tlačítka se spustí náš signál.
+Spuštění signálu způsobíme zavoláním metody emit na náš signál, do metody může odeslat parametry odpovídající signatůře našeho signálu, v našem případě to je string. Signály jde spouštět mnoha různými eventy, nebo i jinými způsoby. Stačí pouze kreativně vytvořit spojení.</p>
+</div>
+</div>
+<div class="section" id="sloty">
+<h2>Sloty<a class="headerlink" href="#sloty" title="Permalink to this headline">¶</a></h2>
+<p>Slotem může být jakákoliv funkce nebo metoda v Pythonu. Slot je proveden v případě, když je signál vázaný na tento slot emitován. Na rozdíl od Qt knihovny nemusíme v PyQt sloty přímo deklarovat, přesto tuto možnost máme. Přestože knihovna Qt musí mít definován návratový datový typ, v Pyqt toto není potřeba a to z toho důvodu, že Python nemá stanovený návratový datový typ. Přesto je i v PyQt možnost jak nastavit návratový datový typ slot a to si nyní si ukážeme.</p>
+<div class="section" id="pyqtslot-dekorator">
+<h3>PyqtSlot dekorátor<a class="headerlink" href="#pyqtslot-dekorator" title="Permalink to this headline">¶</a></h3>
+<p>K definování návratového datového typu slotu se používá dekorátoru pyqtSlot. Přestože, Pyqt knihovna umožňuje použít jako slot všechny funkce nebo metody, hodí se v případech, kdy se potýkáme s nedostatkem paměti v systému. Neboť sloty dekorované pyqtSlot dekorátorem potřebují méně paměti a také se rychleji spouští. Toto je způsobeno tím, že dekorátor poskytuje slotu C++ signaturu.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">PyQt4.QtCore</span> <span class="kn">import</span> <span class="n">QObject</span><span class="p">,</span> <span class="n">pyqtSlot</span>
+<span class="k">class</span> <span class="nc">Foo</span><span class="p">(</span><span class="n">QObject</span><span class="p">):</span>
+   <span class="nd">@pyqtSlot</span><span class="p">()</span>
+   <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="sd">&quot;&quot;&quot; C++: void foo() &quot;&quot;&quot;</span>
+   <span class="nd">@pyqtSlot</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+   <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
+       <span class="sd">&quot;&quot;&quot; C++: void foo(int, QString) &quot;&quot;&quot;</span>
+   <span class="nd">@pyqtSlot</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;bar&#39;</span><span class="p">)</span>
+   <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">):</span>
+       <span class="sd">&quot;&quot;&quot; C++: void bar(int) &quot;&quot;&quot;</span>
+   <span class="nd">@pyqtSlot</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+   <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">):</span>
+       <span class="sd">&quot;&quot;&quot; C++: int foo(int) &quot;&quot;&quot;</span>
+   <span class="nd">@pyqtSlot</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">QObject</span><span class="p">)</span>
+   <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">):</span>
+       <span class="sd">&quot;&quot;&quot; C++: int foo(int, QObject *) &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p>Tímto dekorátorem můžeme také nastavit, která ze signatur signálu má být k danému slotu přípojena. Toto se hodí například pro zaškrtávací tlačítko, které má signál clicked s dvěma signaturami, jedna, která po kliknutí vrátí hodnotu zaškrtnutí tlačíka a druhá, která nic nenavrací, pokud by nás zajímala pouze druhá signatura, můžeme použít tuto konstrukci.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="nd">@pyqtSlot</span><span class="p">(</span><span class="nb">bool</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">on_spinbox_valueChanged</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="c"># i bude bool hodnota</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Signály a sloty</a><ul>
+<li><a class="reference internal" href="#signaly">Signály</a><ul>
+<li><a class="reference internal" href="#vazani-signalu">Vázání signálů</a></li>
+<li><a class="reference internal" href="#stary-styl">Starý styl</a></li>
+<li><a class="reference internal" href="#novy-styl">Nový styl</a></li>
+<li><a class="reference internal" href="#vytvareni-signalu">Vytváření signálů</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sloty">Sloty</a><ul>
+<li><a class="reference internal" href="#pyqtslot-dekorator">PyqtSlot dekorátor</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/Signaly a sloty.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../index.html">PyQt4 2.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Adam Obrtel.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

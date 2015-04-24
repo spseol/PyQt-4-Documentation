@@ -1,0 +1,147 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Vytvoření okna &mdash; PyQt4 2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="PyQt4 2.0 documentation" href="index.html" />
+    <link rel="next" title="Rozvržení" href="Grid.html" />
+    <link rel="prev" title="Qt Designer" href="kwan.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Grid.html" title="Rozvržení"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="kwan.html" title="Qt Designer"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">PyQt4 2.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="vytvoreni-okna">
+<h1>Vytvoření okna<a class="headerlink" href="#vytvoreni-okna" title="Permalink to this headline">¶</a></h1>
+<p>V prvním příkladu si ukážeme jak vytvořit základní okno, nastavení titulku a ikony okna a přidám i pár tipů k přehlednosti kódu.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">PyQt4</span> <span class="kn">import</span> <span class="n">QtGui</span>
+</pre></div>
+</div>
+<p>Importování všech nezbytných modulů pro naše okno.
+Neimportujeme všechny třídy PyQt4, neboť bychom se ztratili v množství tříd a náš kód by byl ůplně nepřehledný.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">main_window</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QWidget</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="nb">super</span><span class="p">(</span><span class="n">main_window</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setupUi</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Jako první vytváříme třídu main_window, která dědí metody z třídy QWidget. V této třídě jsou umístěny metody pro práci s velikostí widgetů, posouvání widgetů a mnoho dalších věcí. Dále vytvoříme metodu __init__(), která se vždy spustí při inicializaci objektu.
+Funkce super() nám umožňuje inicializovat všechny třídy, ze kterých jsme dědily. To je dobré v tom, že nemusíme zdlouhavě vypisovat všechny rodiče a inicializovat je. Poté se spouští metoda setup (), která nám vytvoří
+samotné okno.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">setupUi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span><span class="mi">150</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="s">&quot;Hello world&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setWindowIcon</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QIcon</span><span class="p">(</span><span class="s">&quot;world.jpg&quot;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Funkce move(pozice x, pozice y) nám přesune okno na dané souřadnice. Ty se počítají od pravého horního rohu obrazovky. Funkce resize(pozice x, pozice y) nám umožnuje nastavovat velikost okna. Jak vidíte move a resize jsou si velmi podobné. Z toho nám může být jasné, že zvětšení okna se bere od pravého horního rohu okna. Funkce resize i move se dají využít u všech ostatních widgetů a provádějí stejnou věc.
+SetWindowTitle(string) nastavuje titulek okna. SetWindowIcon(QIcon)
+vytváří ikonu okna podle objektu QIcon. Tento objekt vytovoříme pomocí funkce QIcon(cesta k obrazku) umístěné v modulu QtGui. Jako poslední
+funkci použijeme show (), která nám zobrazí celé okno na obrazovku. Je důležité, abyste funkci show použily až po vytvoření osatních widgetů, jinak se vám widgety nezobrazí.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">app</span><span class="o">=</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+<span class="n">okno</span><span class="o">=</span><span class="n">main_window</span><span class="p">()</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">exec_</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>A nyní se dostáváme k části, kdy inicializujeme celou naši třídu, která vytváří okno. Jako první si vytvoříme objekt QApplication (list proměnných z příkazové řadky), který vytváří hlavní smyčku programu, v níž se sbírají informace o tom, jestli bylo stisknuto tlačítko atd. Exit() nám zajistí to, že se okno korektně vypne při opuštění hlavní smyčky. Argumentem je stav jestli je aplikace stalé funkční. Ten získáme funkcí exec_().</p>
+<img alt="okna.png" src="okna.png" />
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="kwan.html"
+                        title="previous chapter">Qt Designer</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Grid.html"
+                        title="next chapter">Rozvržení</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/Okno.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Grid.html" title="Rozvržení"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="kwan.html" title="Qt Designer"
+             >previous</a> |</li>
+        <li><a href="index.html">PyQt4 2.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Adam Obrtel.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
