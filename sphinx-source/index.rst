@@ -3,16 +3,16 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to PyQt-4-Documentace's documentation!
+PyQt4 Documentace
 ==============================================
 
-Contents:
+Obsah:
 
 .. toctree::
    :maxdepth: 3
    
    uvod
-   Licence
+   licence
    OOP
    Principy Gui
    Signaly a sloty
@@ -31,6 +31,13 @@ Contents:
    End
    
 
+Vyhledávání
+==================
+
+* :ref:`search` 
+
+.. * :ref:`genindex`
+.. * :ref:`modindex`
 
 
 
