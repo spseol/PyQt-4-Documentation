@@ -64,4 +64,4 @@ Proto aby painter použil typ čáry, který chceme nakreslit, musíme nastavit 
 
 Pro vytvoření obrazců jako elipsa nebo obdelník potřebjeme metodu painter.setBrush(QColor). Ta nám vyplní obrazec barvou a ten se díky tomu stane viditelným. Protože nechceme aby naše vytvořené obrazce neměli okraj. Vytvoříme QPen s parametrem NoPen, to nám zajistí, že QPen nebude viditelné. Poté pomocí metody painter.drawRect(x_levý,y_levý,x_pravý,y_pravý) vykreslíme obdelník, takto vytvoříme dva další obdelníky s různou barvou. Elipsa se vytváří stejným způsobem jako obdelník, ale metodou painter.drawElipse(x_stred,y_stred,výška,šířka).
 
-.. image:: 14.png
+.. image:: img/14.png

@@ -40,5 +40,5 @@ Poslední část kódu je totožná, jako v předchozích příkladech.::
 
 Metoda chk_state obsahuje jednoduchou podmínku, ve které se ptáme stejně, jako v předchozím příkladu na stav widgetu. Dále podle stavu nastavíme odpovídající odpověď.
 
-.. image:: CheckBox.png
-.. image:: CheckBox-klik.png
+.. image:: img/CheckBox.png
+.. image:: img/CheckBox-klik.png

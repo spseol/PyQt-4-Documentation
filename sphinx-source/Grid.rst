@@ -39,7 +39,7 @@ V cyklu for vytvoříme tlačítka, která umístíme pomocí metody addWidget (
 Poté inkrementujeme j o jedna. Tato proměnná nám určuje počet již vytvořených tlačítek. Vytvoření tlačítek tímto způsobem je 
 velmi výhodné, protože zpřehledňuje kód. Dále nastavíme našemu hlavnímu oknu rozvržení metodou setLayout(rozvržení) a potom jako obvykle okno zobrazíme.
 
-.. image:: Grid.png
+.. image:: img/Grid.png
  
 BoxLayout
 ---------------
@@ -84,4 +84,4 @@ Zde jde krásně vidět, jak si jsou VBoxLayout a HBoxLayout podobné, neboť po
 
 V poslední části kódu si vytvoříme objekt grid, který je vytvořen konstruktorem QGridLayout. Do tohoto rozvržení potom umístíme hbox a vbox pomocí metody addLayout(rozvržení). Toto je nutné, neboť bychom nebyli schopni nastavit rozvržení pro hlavní okno, jelikož okno může mít pouze jedno rozvržení. Jako obvykle musíme okno zobrazit.
 
-.. image:: BoxLayout.png
+.. image:: img/BoxLayout.png

@@ -42,8 +42,8 @@ V poslední části metody setup vytvoříme rozvržení a nastavíme je jako hl
 
 Po kliknutí na tlačítko se provede vazba. Ta vyvolá funkci, která jako první provede nastavení textu do dříve vytvořené lbl pomocí metody setText(„text“). Dále je nutné nastavit velikost lbl widgetu, neboť bychom neviděli žádný text. Widgety totiž nemají žádnou velikost při jeho vytvoření. Toto provedeme pomocí metody resize, kterou jsme si již představili. 
 
-.. image:: Tlacitko.png
-.. image:: Tlacitko_klik.png
+.. image:: img/Tlacitko.png
+.. image:: img/Tlacitko_klik.png
 
 
 

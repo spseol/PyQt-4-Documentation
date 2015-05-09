@@ -68,5 +68,5 @@ V poslední části metody setup vytvoříme dva radioButtony. Toto provedeme st
 
 Metoda change obstarává změnu textu v objektu lbl podle zaškrtnutého radioButtonu. Z tohoto důvodu si vytvoříme objekt font, kterým budeme ovlivňovat text v objektu lbl. V podmínkách se ptáme metodou checkedID, která nám řekne id tlačítka v buttonGroup jež je zaškrtnuto. Tuto informaci porovnáme následně s id radioButtonu, které získáme metodou id(jméno objektu). A dále pak nastavíme upravení textu.
 
-.. image:: Radio.png
-.. image:: radio2.png
+.. image:: img/Radio.png
+.. image:: img/radio2.png

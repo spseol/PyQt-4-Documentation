@@ -174,4 +174,4 @@ V metodě dialog si vytvoříme řetěz, podle toho jestli uživatel vyhrál neb
 
 V této metodě si vyresetuje hru do původního stavu, toho dosáhneme pomocí  projití pole widgets, ve kterém máme umístěny widgety, které potřebujeme změnit. Na řádku jedenáct jsou tlačítka, do kterých zadává uživatel svůj pokus, na nultém řádku jsou tlačítka s hádankou pro to tato tlačítka obarvíme modrou, respektive černou barvou. Poté vyresetujeme popisky, které jsou na všech řádcích kromě jedenáctého a vždy v pátem sloupci. Na konci zavoláme metodu new, která nám vytvoří novou hádanku a vyresetuje čitač pokusů.
 
-.. image:: 15.png
+.. image:: img/15.png

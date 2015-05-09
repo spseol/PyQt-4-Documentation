@@ -13,11 +13,11 @@ Obsah:
    
    uvod
    licence
-   OOP
-   Principy Gui
-   Signaly a sloty
-   kwan
-   Okno
+   oop
+   principy_gui
+   signaly_sloty
+   qt_designer
+   okno
    Grid
    PushButton
    Labe
@@ -35,7 +35,6 @@ Vyhledávání
 ==================
 
 * :ref:`search` 
-
 .. * :ref:`genindex`
 .. * :ref:`modindex`
 
