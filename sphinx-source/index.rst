@@ -6,7 +6,13 @@
 PyQt4 Documentace
 ==============================================
 
+GitHub
+--------------
+
+Zdrojové texty na githubu: `<https://github.com/spseol/PyQt4Doc>`_
+
 Obsah:
+--------
 
 .. toctree::
    :maxdepth: 3
@@ -16,8 +22,7 @@ Obsah:
    oop
    principy_gui
    signaly_sloty
-   qt_designer
-   okno
+   Window 
    Grid
    PushButton
    Labe
@@ -28,6 +33,7 @@ Obsah:
    Slider
    Dialog
    Logik
+   qt_designer
    End
    
 
@@ -35,8 +41,8 @@ Vyhledávání
 ==================
 
 * :ref:`search` 
+
 .. * :ref:`genindex`
 .. * :ref:`modindex`
-
 
 

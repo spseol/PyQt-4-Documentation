@@ -1,1 +1,1 @@
-../../Window setup/hello_world.py
+../../Window/hello_world.py

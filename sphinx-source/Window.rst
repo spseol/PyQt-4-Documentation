@@ -1,4 +1,7 @@
-﻿Vytvoření okna
+﻿Celý zdorojový kód: :download:`hello_world.py <src/hello_world.py>`.
+
+===============
+Vytvoření okna
 ===============
 
 V prvním příkladu si ukážeme jak vytvořit základní okno, nastavení titulku a
@@ -65,5 +68,7 @@ opuštění hlavní smyčky. Argumentem je stav jestli je aplikace stalé funkč
 Ten získáme funkcí ``exec_()``.
 
 .. image:: img/okna.png
+
+-------------------------------------------
 
 Celý zdorojový kód: :download:`hello_world.py <src/hello_world.py>`.

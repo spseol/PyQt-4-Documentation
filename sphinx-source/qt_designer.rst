@@ -112,10 +112,24 @@ máme vyřešenou naši aplikaci a stačí nám projekt uložit. Projekt bude ul
 jako speciální typ soubor s názvem .ui, který musíme převést na python kód a to
 si nyní ukážeme.
 
+
+Pro převedení .ui souboru musíme použít příkazovou řádku:
+
+.. code-block:: console
+
+    $ pyuic4 input.ui -o output.py
+
+Prvním parametrem je ``.ui`` soubor. Zapřepínač ``–o`` připojíme jméno
+výstupního souboru (většinou s příponou ``.py`` . Tento příkaz nám vytvoří
+python kód naší aplikace do tohoto kódu stačí již jen přidat naše sloty a
+inicializovat naše vytvořené gui.
+
 .. image:: img/12.png
 
-Pro převedení .ui souboru musíme použít příkazovou řádku, do které napíšeme
-příkaz podle obrázku. Prvním parametrem je .ui file a –o parametr a dalším
-parametrem je soubor s příponou .py . Tento příkaz nám vytvoří python kód naší
-aplikace do tohoto kódu stačí již jen přidat naše sloty a inicializovat naše
-vytvořené gui.
+--------------------------------------------------
+
+Zdorojové kódy
+================
+
+:download:`smenarnaGUI.py <src/smenarnaGUI.py>`.
+:download:`smenarna.py <src/smenarna.py>`.
