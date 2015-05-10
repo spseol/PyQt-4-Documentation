@@ -23,7 +23,7 @@ Obsah:
    principy_gui
    signaly_sloty
    Window 
-   Grid
+   Rozlozeni 
    PushButton
    Labe
    CheckBox

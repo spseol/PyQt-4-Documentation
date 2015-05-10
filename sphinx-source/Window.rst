@@ -1,5 +1,7 @@
 ﻿Celý zdorojový kód: :download:`hello_world.py <src/hello_world.py>`.
 
+.. _window:
+
 ===============
 Vytvoření okna
 ===============

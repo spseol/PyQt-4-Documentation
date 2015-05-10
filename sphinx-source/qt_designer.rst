@@ -131,5 +131,5 @@ inicializovat naše vytvořené gui.
 Zdorojové kódy
 ================
 
-:download:`smenarnaGUI.py <src/smenarnaGUI.py>`.
-:download:`smenarna.py <src/smenarna.py>`.
+* :download:`smenarnaGUI.py <src/smenarnaGUI.py>`.
+* :download:`smenarna.py <src/smenarna.py>`.
