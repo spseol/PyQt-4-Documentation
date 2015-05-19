@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,15 +6,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>PushButton &mdash; PyQt4 2.0 documentation</title>
+    <title>PushButton &mdash; Dokumentace pro PyQt4 0.2.1</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '2.0',
+        URL_ROOT:    './',
+        VERSION:     '0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,24 +23,25 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="PyQt4 2.0 documentation" href="index.html" />
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="Dokumentace pro PyQt4 0.2.1" href="index.html" />
     <link rel="next" title="Label" href="Labe.html" />
-    <link rel="prev" title="Rozvržení" href="Grid.html" /> 
+    <link rel="prev" title="Rozvržení" href="Rozlozeni.html" /> 
   </head>
   <body>
     <div class="related">
-      <h3>Navigation</h3>
+      <h3>Navigace</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
+          <a href="genindex.html" title="Obecný rejstřík"
+             accesskey="I">rejstřík</a></li>
         <li class="right" >
           <a href="Labe.html" title="Label"
-             accesskey="N">next</a> |</li>
+             accesskey="N">další</a> |</li>
         <li class="right" >
-          <a href="Grid.html" title="Rozvržení"
-             accesskey="P">previous</a> |</li>
-        <li><a href="index.html">PyQt4 2.0 documentation</a> &raquo;</li> 
+          <a href="Rozlozeni.html" title="Rozvržení"
+             accesskey="P">předchozí</a> |</li>
+        <li><a href="index.html">Dokumentace pro PyQt4 0.2.1</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -51,51 +50,72 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="pushbutton">
-<h1>PushButton<a class="headerlink" href="#pushbutton" title="Permalink to this headline">¶</a></h1>
-<p>Tento widget je pravděpodobně nejvíce využívaný, protože se jím provádí mnoho ukonů, a to od posílání dat uživateli,
-po přesouvání se mezi formuláři a mnoho jiného. Je tedy důležité tento widget pochopit. Dále si ukážeme jak vytvořit tooltip
-pro zobrazení hodnotných informací pro uživatele.</p>
+  <p>Zdorojové kódy: <a class="reference download internal" href="_downloads/Button.py"><tt class="xref download docutils literal"><span class="pre">Button.py</span></tt></a>.</p>
+<div class="section" id="pushbutton">
+<span id="id1"></span><h1>PushButton<a class="headerlink" href="#pushbutton" title="Trvalý odkaz na tento nadpis">¶</a></h1>
+<p>Tento widget je pravděpodobně nejvíce využívaný, protože se jím provádí mnoho
+ukonů, a to od posílání dat uživateli, po přesouvání se mezi formuláři a mnoho
+jiného. Je tedy důležité tento widget pochopit. Dále si ukážeme jak vytvořit
+tooltip pro zobrazení hodnotných informací pro uživatele.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">from</span> <span class="nn">PyQt4</span> <span class="kn">import</span> <span class="n">QtGui</span><span class="p">,</span><span class="n">QtCore</span>
 <span class="k">class</span> <span class="nc">Main_Window</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QWidget</span><span class="p">,):</span>
-        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,):</span>
-                <span class="nb">super</span><span class="p">(</span><span class="n">Main_Window</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">Setup_Ui</span><span class="p">()</span>
-        <span class="k">def</span> <span class="nf">Setup_Ui</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-                <span class="n">QtGui</span><span class="o">.</span><span class="n">QToolTip</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QFont</span><span class="p">(</span><span class="s">&quot;Arial&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Main_Window</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Setup_Ui</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">Setup_Ui</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">QtGui</span><span class="o">.</span><span class="n">QToolTip</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QFont</span><span class="p">(</span><span class="s">&quot;Arial&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Jako obvykle si importujete potřebné moduly. Můžete si všimnout, že kromě obvyklého QtGui importujeme i modul QtCore, který obsahuje metody pro vytvoření vazeb jež reagují na akce uživatele.
-Dále si v metodě Setup_Ui nastavíme font našeho tooltipu pomocí metody setToolTip(QFont). Objekt QFont se vytváří pomoci metody QFont(„jméno fontu, velikost fontu“).
-Potom vytvoříme objekt lbl pomocí konstruktoru QLabel(rodič). O tomto widgetu si řekneme něco více v příštích kapitolách. Pro nynější příklad tento widget použijeme pouze na zobrazení textu.</p>
+<p>Jako obvykle si importujete potřebné moduly. Můžete si všimnout, že kromě
+obvyklého <tt class="docutils literal"><span class="pre">QtGui</span></tt> importujeme i modul <tt class="docutils literal"><span class="pre">QtCore</span></tt>, který obsahuje metody pro
+vytvoření vazeb jež reagují na akce uživatele.</p>
+<p>Dále si v metodě <tt class="docutils literal"><span class="pre">Setup_Ui</span></tt> nastavíme font našeho tooltipu pomocí metody
+<tt class="docutils literal"><span class="pre">setToolTip(QFont)</span></tt>. Objekt <tt class="docutils literal"><span class="pre">QFont</span></tt> se vytváří pomoci metody
+<tt class="docutils literal"><span class="pre">QFont(jméno_fontu,</span> <span class="pre">velikost_fontu)</span></tt>. Potom vytvoříme objekt <tt class="docutils literal"><span class="pre">lbl</span></tt> pomocí
+konstruktoru  <tt class="docutils literal"><span class="pre">QLabel(rodič)</span></tt>. O tomto widgetu si řekneme něco více v
+příštích kapitolách (<a class="reference internal" href="Labe.html#label"><em>Label</em></a>). Pro nynější příklad tento widget použijeme
+pouze na zobrazení textu.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">btn</span><span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="s">&quot;klikni&quot;</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span>
 <span class="n">btn</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">btn</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">())</span>
 <span class="n">btn</span><span class="o">.</span><span class="n">setToolTip</span><span class="p">(</span><span class="s">&quot;tlacitko slouzici na zobrazeni textu&quot;</span><span class="p">)</span>
 <span class="n">btn</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Pomocí konstruktoru QPushButton(“text”,rodič) vytvoříme naše tlačítko, které
-nastavíme metodou setTooltip(“text”). Dále vytvoříme vazbu, která bude reagovat na kliknutí a vyvolá
-metodu text. Toto je podle mne nejdůležitější část kódu, proto aby se naše aplikace staly živějšími.</p>
+<p>Pomocí konstruktoru <tt class="docutils literal"><span class="pre">QPushButton(text,rodič)</span></tt> vytvoříme naše tlačítko, které
+nastavíme metodou <tt class="docutils literal"><span class="pre">setTooltip(text)</span></tt>. Dále vytvoříme vazbu, která bude
+reagovat na kliknutí a vyvolá metodu <tt class="docutils literal"><span class="pre">text</span></tt>. Toto je podle mne nejdůležitější
+část kódu, proto aby se naše aplikace staly živějšími.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">grid</span><span class="o">=</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QGridLayout</span><span class="p">()</span>
-<span class="n">grid</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">grid</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">grid</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">grid</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="s">&quot;Tlacitko&quot;</span><span class="p">)</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>V poslední části metody setup vytvoříme rozvržení a nastavíme je jako hlavní rozvržení pro naše okno. Nyní se podíváme na důležitější metodu, kterou je Text. Tato metoda zajišťuje zobrazení textu po kliknutí na tlačítko.</p>
+<p>V poslední části metody setup vytvoříme rozvržení a nastavíme je jako hlavní
+rozvržení pro naše okno. Nyní se podíváme na důležitější metodu, kterou je
+Text. Tato metoda zajišťuje zobrazení textu po kliknutí na tlačítko.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">text</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s">&#39;klikl jste&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">())</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s">&#39;klikl jste&#39;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">())</span>
 </pre></div>
 </div>
-<p>Po kliknutí na tlačítko se provede vazba. Ta vyvolá funkci, která jako první provede nastavení textu do dříve vytvořené lbl pomocí metody setText(„text“). Dále je nutné nastavit velikost lbl widgetu, neboť bychom neviděli žádný text. Widgety totiž nemají žádnou velikost při jeho vytvoření. Toto provedeme pomocí metody resize, kterou jsme si již představili.</p>
+<p>Po kliknutí na tlačítko se provede vazba. Ta vyvolá funkci, která jako první
+provede nastavení textu do dříve vytvořené <tt class="docutils literal"><span class="pre">lbl</span></tt> pomocí metody
+<tt class="docutils literal"><span class="pre">setText(text)</span></tt>. Dále je nutné nastavit velikost <tt class="docutils literal"><span class="pre">lbl</span></tt> widgetu, neboť
+bychom neviděli žádný text. Widgety totiž nemají žádnou velikost při jeho
+vytvoření. Toto provedeme pomocí metody <tt class="docutils literal"><span class="pre">resize</span></tt>, kterou jsme si již představili.</p>
 <img alt="_images/Tlacitko.png" src="_images/Tlacitko.png" />
 <img alt="_images/Tlacitko_klik.png" src="_images/Tlacitko_klik.png" />
+<div class="section" id="zdorojove-kody">
+<h2>Zdorojové kódy<a class="headerlink" href="#zdorojove-kody" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<ul class="simple">
+<li><a class="reference download internal" href="_downloads/Button.py"><tt class="xref download docutils literal"><span class="pre">Button.py</span></tt></a>.</li>
+</ul>
+</div>
 </div>
 
 
@@ -104,27 +124,38 @@ metodu text. Toto je podle mne nejdůležitější část kódu, proto aby se na
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="Grid.html"
-                        title="previous chapter">Rozvržení</a></p>
-  <h4>Next topic</h4>
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Obsah</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">PushButton</a><ul>
+<li><a class="reference internal" href="#zdorojove-kody">Zdorojové kódy</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Přechozí téma</h4>
+  <p class="topless"><a href="Rozlozeni.html"
+                        title="předchozí kapitola">Rozvržení</a></p>
+  <h4>Další téma</h4>
   <p class="topless"><a href="Labe.html"
-                        title="next chapter">Label</a></p>
-  <h3>This Page</h3>
+                        title="další kapitola">Label</a></p>
+  <h3>Tato stránka</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/PushButton.txt"
-           rel="nofollow">Show Source</a></li>
+           rel="nofollow">Ukázat zdroj</a></li>
   </ul>
 <div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
+  <h3>Rychlé vyhledávání</h3>
     <form class="search" action="search.html" method="get">
       <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <input type="submit" value="OK" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
     <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
+    Zadejte hledané termíny nebo jméno modulu, třídy či funkce.
     </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
@@ -133,23 +164,23 @@ metodu text. Toto je podle mne nejdůležitější část kódu, proto aby se na
       <div class="clearer"></div>
     </div>
     <div class="related">
-      <h3>Navigation</h3>
+      <h3>Navigace</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
+          <a href="genindex.html" title="Obecný rejstřík"
+             >rejstřík</a></li>
         <li class="right" >
           <a href="Labe.html" title="Label"
-             >next</a> |</li>
+             >další</a> |</li>
         <li class="right" >
-          <a href="Grid.html" title="Rozvržení"
-             >previous</a> |</li>
-        <li><a href="index.html">PyQt4 2.0 documentation</a> &raquo;</li> 
+          <a href="Rozlozeni.html" title="Rozvržení"
+             >předchozí</a> |</li>
+        <li><a href="index.html">Dokumentace pro PyQt4 0.2.1</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2015, Adam Obrtel.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Vytvořeno pomocí <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,15 +6,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>RadioButton &mdash; PyQt4 2.0 documentation</title>
+    <title>RadioButton &mdash; Dokumentace pro PyQt4 0.2.1</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '2.0',
+        URL_ROOT:    './',
+        VERSION:     '0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,24 +23,25 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="PyQt4 2.0 documentation" href="index.html" />
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="Dokumentace pro PyQt4 0.2.1" href="index.html" />
     <link rel="next" title="LineEdit" href="edit.html" />
     <link rel="prev" title="CheckBox" href="CheckBox.html" /> 
   </head>
   <body>
     <div class="related">
-      <h3>Navigation</h3>
+      <h3>Navigace</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
+          <a href="genindex.html" title="Obecný rejstřík"
+             accesskey="I">rejstřík</a></li>
         <li class="right" >
           <a href="edit.html" title="LineEdit"
-             accesskey="N">next</a> |</li>
+             accesskey="N">další</a> |</li>
         <li class="right" >
           <a href="CheckBox.html" title="CheckBox"
-             accesskey="P">previous</a> |</li>
-        <li><a href="index.html">PyQt4 2.0 documentation</a> &raquo;</li> 
+             accesskey="P">předchozí</a> |</li>
+        <li><a href="index.html">Dokumentace pro PyQt4 0.2.1</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -51,30 +50,37 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="radiobutton">
-<h1>RadioButton<a class="headerlink" href="#radiobutton" title="Permalink to this headline">¶</a></h1>
-<p>RadioButton je widget velmi podobný widgetu CheckBox. Rozdíl je v tom, že ze skupiny několika těchto widgetů můžete vybrat
-pouze jednu možnost. Proto se tento widget hodí pro zjišťování informací, které nemohou proběhnout zároveň (např. volba národnosti, pohlaví atd.).</p>
+  <p>Zdorojové kódy: <a class="reference download internal" href="_downloads/Radio.py"><tt class="xref download docutils literal"><span class="pre">Radio.py</span></tt></a>.</p>
+<div class="section" id="radiobutton">
+<span id="id1"></span><h1>RadioButton<a class="headerlink" href="#radiobutton" title="Trvalý odkaz na tento nadpis">¶</a></h1>
+<p><tt class="docutils literal"><span class="pre">RadioButton</span></tt> je widget velmi podobný widgetu CheckBox. Rozdíl je v tom, že
+ze skupiny několika těchto widgetů můžete vybrat pouze jednu možnost. Proto se
+tento widget hodí pro zjišťování informací, které nemohou proběhnout zároveň
+(např. volba národnosti, pohlaví atd.).</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">PyQt4</span> <span class="kn">import</span> <span class="n">QtGui</span><span class="p">,</span><span class="n">QtCore</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="k">class</span> <span class="nc">Ui</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QWidget</span><span class="p">):</span>
-        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-                <span class="nb">super</span><span class="p">(</span><span class="n">Ui</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
-        <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="s">&quot;Hezky text&quot;</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">())</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">radio</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QRadioButton</span><span class="p">(</span><span class="s">&quot;cervena&quot;</span><span class="p">,</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">radio</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radio</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">())</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">radio</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">radio2</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QRadioButton</span><span class="p">(</span><span class="s">&quot;modra&quot;</span><span class="p">,</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">radio2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radio2</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">())</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Ui</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="s">&quot;Hezky text&quot;</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radio</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QRadioButton</span><span class="p">(</span><span class="s">&quot;cervena&quot;</span><span class="p">,</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radio</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radio</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radio</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radio2</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QRadioButton</span><span class="p">(</span><span class="s">&quot;modra&quot;</span><span class="p">,</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radio2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radio2</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">())</span>
 </pre></div>
 </div>
-<p>Jak je možné vidět v první části kódu zůstává vše stejné a proto se zaměříme na metodu setup. V ní si vytvoříme objekt lbl, který se bude měnit v
-závislosti na zvoleném radioButtonu. Objekt radio a radio2 vytvoříme pomocí konstruktoru QRadioButton(“Text“, rodič). Jak si můžete všimnout, tak jsme použily metodu setChecked(True/False) na objekt radio.
-Tato metoda způsobí to, že tento widget zaškrtne. To je dobré v případě, že je nutné mít alespoň jednu z možností žaskrtnutou.</p>
+<p>Jak je možné vidět v první části kódu zůstává vše stejné a proto se zaměříme na
+metodu setup. V ní si vytvoříme objekt lbl, který se bude měnit v závislosti na
+zvoleném radioButtonu. Objekt radio a radio2 vytvoříme pomocí konstruktoru
+QRadioButton(“Text“, rodič). Jak si můžete všimnout, tak jsme použily metodu
+setChecked(True/False) na objekt radio. Tato metoda způsobí to, že tento widget
+zaškrtne. To je dobré v případě, že je nutné mít alespoň jednu z možností
+žaskrtnutou.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QButtonGroup</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">addButton</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radio</span><span class="p">)</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">addButton</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radio2</span><span class="p">)</span>
@@ -105,22 +111,28 @@ Jako poslední vytvoříme vazbu po kliknutí na tlačítko, která zavolá funk
 </div>
 <p>V poslední části metody setup vytvoříme dva radioButtony. Toto provedeme stejným způsobem, jaký jsme si již ukazovali. Dále musíme všechny widgety umístit do rozvržení grid a toto rozvržení nastavíme oknu a okno zobrazíme.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">change</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">font</span><span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QFont</span><span class="p">()</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">checkedId</span><span class="p">()</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">id</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radio</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s">&quot;color:red&quot;</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s">&quot;color:blue&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">checkedId</span><span class="p">()</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">id</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radio3</span><span class="p">):</span>
-                <span class="n">font</span><span class="o">.</span><span class="n">setItalic</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-                <span class="n">font</span><span class="o">.</span><span class="n">setBold</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
+    <span class="n">font</span><span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QFont</span><span class="p">()</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">checkedId</span><span class="p">()</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">id</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radio</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s">&quot;color:red&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s">&quot;color:blue&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">checkedId</span><span class="p">()</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">id</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radio3</span><span class="p">):</span>
+        <span class="n">font</span><span class="o">.</span><span class="n">setItalic</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">font</span><span class="o">.</span><span class="n">setBold</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Metoda change obstarává změnu textu v objektu lbl podle zaškrtnutého radioButtonu. Z tohoto důvodu si vytvoříme objekt font, kterým budeme ovlivňovat text v objektu lbl. V podmínkách se ptáme metodou checkedID, která nám řekne id tlačítka v buttonGroup jež je zaškrtnuto. Tuto informaci porovnáme následně s id radioButtonu, které získáme metodou id(jméno objektu). A dále pak nastavíme upravení textu.</p>
 <img alt="_images/Radio.png" src="_images/Radio.png" />
 <img alt="_images/radio2.png" src="_images/radio2.png" />
+<div class="section" id="zdorojove-kody">
+<h2>Zdorojové kódy<a class="headerlink" href="#zdorojove-kody" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<ul class="simple">
+<li><a class="reference download internal" href="_downloads/Radio.py"><tt class="xref download docutils literal"><span class="pre">Radio.py</span></tt></a>.</li>
+</ul>
+</div>
 </div>
 
 
@@ -129,27 +141,38 @@ Jako poslední vytvoříme vazbu po kliknutí na tlačítko, která zavolá funk
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Obsah</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">RadioButton</a><ul>
+<li><a class="reference internal" href="#zdorojove-kody">Zdorojové kódy</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Přechozí téma</h4>
   <p class="topless"><a href="CheckBox.html"
-                        title="previous chapter">CheckBox</a></p>
-  <h4>Next topic</h4>
+                        title="předchozí kapitola">CheckBox</a></p>
+  <h4>Další téma</h4>
   <p class="topless"><a href="edit.html"
-                        title="next chapter">LineEdit</a></p>
-  <h3>This Page</h3>
+                        title="další kapitola">LineEdit</a></p>
+  <h3>Tato stránka</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/RadioButton.txt"
-           rel="nofollow">Show Source</a></li>
+           rel="nofollow">Ukázat zdroj</a></li>
   </ul>
 <div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
+  <h3>Rychlé vyhledávání</h3>
     <form class="search" action="search.html" method="get">
       <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <input type="submit" value="OK" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
     <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
+    Zadejte hledané termíny nebo jméno modulu, třídy či funkce.
     </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
@@ -158,23 +181,23 @@ Jako poslední vytvoříme vazbu po kliknutí na tlačítko, která zavolá funk
       <div class="clearer"></div>
     </div>
     <div class="related">
-      <h3>Navigation</h3>
+      <h3>Navigace</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
+          <a href="genindex.html" title="Obecný rejstřík"
+             >rejstřík</a></li>
         <li class="right" >
           <a href="edit.html" title="LineEdit"
-             >next</a> |</li>
+             >další</a> |</li>
         <li class="right" >
           <a href="CheckBox.html" title="CheckBox"
-             >previous</a> |</li>
-        <li><a href="index.html">PyQt4 2.0 documentation</a> &raquo;</li> 
+             >předchozí</a> |</li>
+        <li><a href="index.html">Dokumentace pro PyQt4 0.2.1</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2015, Adam Obrtel.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Vytvořeno pomocí <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>

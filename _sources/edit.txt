@@ -100,4 +100,4 @@ Tato třída, která reprezentuje dialogové okno, dědí z QDialog a to proto, 
 
 	* Vrátí text napsaný v lineEditu
 
-.. image:: 13.png
+.. image:: img/13.png

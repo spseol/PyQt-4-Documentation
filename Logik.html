@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,15 +6,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Logik &mdash; PyQt4 2.0 documentation</title>
+    <title>Logik &mdash; Dokumentace pro PyQt4 0.2.1</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '2.0',
+        URL_ROOT:    './',
+        VERSION:     '0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,24 +23,25 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="PyQt4 2.0 documentation" href="index.html" />
-    <link rel="next" title="Závěr" href="End.html" />
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="Dokumentace pro PyQt4 0.2.1" href="index.html" />
+    <link rel="next" title="Qt Designer" href="qt_designer.html" />
     <link rel="prev" title="Dialog" href="Dialog.html" /> 
   </head>
   <body>
     <div class="related">
-      <h3>Navigation</h3>
+      <h3>Navigace</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
+          <a href="genindex.html" title="Obecný rejstřík"
+             accesskey="I">rejstřík</a></li>
         <li class="right" >
-          <a href="End.html" title="Závěr"
-             accesskey="N">next</a> |</li>
+          <a href="qt_designer.html" title="Qt Designer"
+             accesskey="N">další</a> |</li>
         <li class="right" >
           <a href="Dialog.html" title="Dialog"
-             accesskey="P">previous</a> |</li>
-        <li><a href="index.html">PyQt4 2.0 documentation</a> &raquo;</li> 
+             accesskey="P">předchozí</a> |</li>
+        <li><a href="index.html">Dokumentace pro PyQt4 0.2.1</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -52,16 +51,17 @@
           <div class="body">
             
   <div class="section" id="logik">
-<h1>Logik<a class="headerlink" href="#logik" title="Permalink to this headline">¶</a></h1>
+<h1>Logik<a class="headerlink" href="#logik" title="Trvalý odkaz na tento nadpis">¶</a></h1>
 <p>Nyní, když již umíme základy PyQt, si ukážeme, jak naprogramovat jednoduchou hru Logik. K vytvoření této aplikace budete potřebovat základní znalosti práce s tlačítky a popisky.</p>
 <p>Logik je logická hra , jejímž cílem je uhádnutí hádanky složené z pěti různých barev. Hra musí umožňovat zobrazení předchozích tahů hráče a také musí zobrazovat počet uhádnutých barev a pozic. Hráč má na uhádnutí pouze 10 pokusů . Celá hra bude vytvořena pouze PyQt4. Nyní si ukážeme jak nato.</p>
-<div class="highlight-python"><pre>class Ui(QtGui.QWidget):
+<div class="highlight-python"><div class="highlight"><pre>class Ui(QtGui.QWidget):
 
   def __init__(self):
        super(Ui,self).__init__()
-       self.barvy=["70,192,255","252,87,52","238,224,66",
-                    "31,133,70","119,73,17","255,49,196","245,189,101")
-       self.setup()</pre>
+       self.barvy=[&quot;70,192,255&quot;,&quot;252,87,52&quot;,&quot;238,224,66&quot;,
+                    &quot;31,133,70&quot;,&quot;119,73,17&quot;,&quot;255,49,196&quot;,&quot;245,189,101&quot;)
+       self.setup()
+</pre></div>
 </div>
 <p>V první části kódu si vytvoříme třídu Ui, ve které si budeme vytvářet hrací okno a budeme také provádět logiku hry. Pravděpodobně by bylo lepší si rozdělit hru a gui do dvou oddělených tříd, ale pro náš tutoriál bude stačit jedna třída. V metodě __init__ si, kromě zavolání metody self.setup(), vytvoříme pole barev, které jsou textové řetězce ve formátu RGB. Tyto barvy budeme používat pro barvení tlačítek pomoci metody setStyleSheet.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">new</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -102,14 +102,15 @@
 </pre></div>
 </div>
 <p>V první části hromadného vytváření widgetů si vytvoříme vrchních pět tlačítek, které budou obsahovat hádanku. Proto si nastavíme barvu těchto tlačítek na černou, také je musíme učinit nemačkatelýmí, toho dosáhneme metodou button.setDiasabled(bool). Poté nám stačí vytvořené tlačítko přidat do pole widgets a umísťit ho do roložení, je důležité si všimnou, že počet řadku je o jedna vetší a to z toho důvodu, že již máme na tomto řádku obsažené popisky.</p>
-<div class="highlight-python"><pre>if radek==11:
+<div class="highlight-python"><div class="highlight"><pre>if radek==11:
 button=QtGui.QPushButton(self)
-button.setStyleSheet("* { background-color: rgb(70,192,255) }")
+button.setStyleSheet(&quot;* { background-color: rgb(70,192,255) }&quot;)
 button.resize(10,5)
 button.clicked.connect(self.change)
 self.widgets[radek].append(button)
 grid.addWidget(button,radek+1,sloupec)
-continue</pre>
+continue
+</pre></div>
 </div>
 <p>Poslední řadu tlačítek vytváříme stejným způsobem jako první řadu, s tím rozdílem, že těmto tlačítkům nastavíme signál clicked, který připojíme na metodu self.change. Dalším rozdílem je barva těchto tlačítek. První barvou tlačitek je první barva z pole barev. I tyto tlačíka umístíme do pole widgets.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">button</span><span class="o">=</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -121,19 +122,20 @@ continue</pre>
 </pre></div>
 </div>
 <p>Pro zobrazování předchozích tahů použijeme znovu tlačítka, a to z důvodu, aby naše aplikace vypadala konzistentně. Jako u prvního řádku tato tlačítka nastavíme metodou setDisabled na nestisknutelná. A jejich barvu nastavíme na šedou, proto aby uživatel viděl kolik mu zbývá tahů. Poté tato tlačítka umístíme do pole widgets.</p>
-<div class="highlight-python"><pre>     if radek==11:
+<div class="highlight-python"><div class="highlight"><pre>     if radek==11:
         button=QtGui.QPushButton(self)
-        button.setText("odeslat")
+        button.setText(&quot;odeslat&quot;)
         button.resize(10,5)
         button.clicked.connect(self.odeslat)
         grid.addWidget(button,radek+1,6)
     else:
         lbl=QtGui.QLabel(self)
-        lbl.setText("0/0")
+        lbl.setText(&quot;0/0&quot;)
         grid.addWidget(lbl,radek+1,6)
         self.widgets[radek].append(lbl)
 self.setLayout(grid)
-self.show()</pre>
+self.show()
+</pre></div>
 </div>
 <p>Každý řádek, na kterém jsou zobrazeny pokusy nebo hádanka by měl obsahovat popisek s počtem uhodnutých barev a pozic. Toho dosáhneme tím, že po vytvoření řádku tlačítek vytvoříme label s potřebnými parametry. Pokud vytváříme tlačítka na řádku jedenáct, čož je řádek, který slouží pro zadávání pokusů, tak místo vytvoření popisku vytvoříme odesílací tlačítko s signálem na metodu self.odeslat, tato metoda slouží pro odeslání pokusu a vyhodnocení stavu hry.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">odeslat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -149,16 +151,17 @@ self.show()</pre>
 </pre></div>
 </div>
 <p>V první části metody odeslat si vytvoříme potřebné promněné a zvýšíme počet pokusů. Pokus užívatele musíme získat z každého tlačítka na jedenáctém řádku. Proto jsi projdeme jedenáctý řádek v poli widgets a pro každé tlačítko získáme jeho barvu. Barvu získáme z tlačítka pomocí button.pallete().color(1).red(), což nám zjistí  hodnotu červené části stejným způsobem zjistíme i modrou a zelenou složku. Tyto hodnoty poté uložíme do řetězce a ten vložíme do pole hádání, které reprezentuje uživatelův pokus.</p>
-<div class="highlight-python"><pre>if hadani==self.hadanka:
+<div class="highlight-python"><div class="highlight"><pre>if hadani==self.hadanka:
    for x in range(5):
-       self.widgets[0][x].setStyleSheet("* { background-color: rgb(%s) }"%self.hadanka[x])
-    self.dialog(True)</pre>
+       self.widgets[0][x].setStyleSheet(&quot;* { background-color: rgb(%s) }&quot;%self.hadanka[x])
+    self.dialog(True)
+</pre></div>
 </div>
 <p>V první části podmínky, která vyhodnucuje stav hry, budeme zjišťovat zdali jsme vyhráli toho dosáhneme porovnáním polí hadami a hadanka, pokud jsou pole stejná odkryjeme hádanku a zavolám self.dialog(bool), která vytvoří dialogové okno s gratulací uživateli.</p>
-<div class="highlight-python"><pre>else:
+<div class="highlight-python"><div class="highlight"><pre>else:
     if self.pokusy&gt;10:
         for x in range(5):
-            self.widgets[0][x].setStyleSheet("* { background-color: rgb(%s) }"%self.hadanka[x])
+            self.widgets[0][x].setStyleSheet(&quot;* { background-color: rgb(%s) }&quot;%self.hadanka[x])
         self.dialog(False)
     else:
         for i in range(len(hadani)):
@@ -166,8 +169,9 @@ self.show()</pre>
                 barvy+=1
             if hadani[i]==self.hadanka[i]:
                 pozice+=1
-            self.widgets[11-self.pokusy][i].setStyleSheet("* { background-color: rgb(%s) }"%hadani[i])
-        self.widgets[11-self.pokusy][5].setText("%i/%i"%(barvy,pozice))</pre>
+            self.widgets[11-self.pokusy][i].setStyleSheet(&quot;* { background-color: rgb(%s) }&quot;%hadani[i])
+        self.widgets[11-self.pokusy][5].setText(&quot;%i/%i&quot;%(barvy,pozice))
+</pre></div>
 </div>
 <p>Pokud jsme neuhádli hádanku nastávaji dvě možnosti stavu hry a to prohra z důvodu vyčerpání pokusů nebo uřivateli pokusy ještě zbývají. V případě, že uživateli nezbývají pokusy zobrazíme hádanku stejným způsobem jako při výhře a zavoláme metodu self.dialog.</p>
 <p>V druhém případě projdeme pole hadani a zjistíme kolik pozic se schoduje a kolik barev uživatel uhádl a zobrazíme barvy pokusu v příslušném řádku. Číslo řádku, na kterém jsou tlačítka, která chceme změnit, zjistíme odečtením pokusů od počtu řádků. To nám zajistí, že se pokusy budou zobrazovat od spodního řádku po horní v pořadí v jakem je uživatel zadal.</p>
@@ -226,27 +230,30 @@ self.show()</pre>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+  <h4>Přechozí téma</h4>
   <p class="topless"><a href="Dialog.html"
-                        title="previous chapter">Dialog</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="End.html"
-                        title="next chapter">Závěr</a></p>
-  <h3>This Page</h3>
+                        title="předchozí kapitola">Dialog</a></p>
+  <h4>Další téma</h4>
+  <p class="topless"><a href="qt_designer.html"
+                        title="další kapitola">Qt Designer</a></p>
+  <h3>Tato stránka</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/Logik.txt"
-           rel="nofollow">Show Source</a></li>
+           rel="nofollow">Ukázat zdroj</a></li>
   </ul>
 <div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
+  <h3>Rychlé vyhledávání</h3>
     <form class="search" action="search.html" method="get">
       <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <input type="submit" value="OK" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
     <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
+    Zadejte hledané termíny nebo jméno modulu, třídy či funkce.
     </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
@@ -255,23 +262,23 @@ self.show()</pre>
       <div class="clearer"></div>
     </div>
     <div class="related">
-      <h3>Navigation</h3>
+      <h3>Navigace</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
+          <a href="genindex.html" title="Obecný rejstřík"
+             >rejstřík</a></li>
         <li class="right" >
-          <a href="End.html" title="Závěr"
-             >next</a> |</li>
+          <a href="qt_designer.html" title="Qt Designer"
+             >další</a> |</li>
         <li class="right" >
           <a href="Dialog.html" title="Dialog"
-             >previous</a> |</li>
-        <li><a href="index.html">PyQt4 2.0 documentation</a> &raquo;</li> 
+             >předchozí</a> |</li>
+        <li><a href="index.html">Dokumentace pro PyQt4 0.2.1</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2015, Adam Obrtel.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Vytvořeno pomocí <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>

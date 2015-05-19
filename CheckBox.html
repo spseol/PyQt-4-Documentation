@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,15 +6,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>CheckBox &mdash; PyQt4 2.0 documentation</title>
+    <title>CheckBox &mdash; Dokumentace pro PyQt4 0.2.1</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '2.0',
+        URL_ROOT:    './',
+        VERSION:     '0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,24 +23,25 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="PyQt4 2.0 documentation" href="index.html" />
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="Dokumentace pro PyQt4 0.2.1" href="index.html" />
     <link rel="next" title="RadioButton" href="RadioButton.html" />
     <link rel="prev" title="Label" href="Labe.html" /> 
   </head>
   <body>
     <div class="related">
-      <h3>Navigation</h3>
+      <h3>Navigace</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
+          <a href="genindex.html" title="Obecný rejstřík"
+             accesskey="I">rejstřík</a></li>
         <li class="right" >
           <a href="RadioButton.html" title="RadioButton"
-             accesskey="N">next</a> |</li>
+             accesskey="N">další</a> |</li>
         <li class="right" >
           <a href="Labe.html" title="Label"
-             accesskey="P">previous</a> |</li>
-        <li><a href="index.html">PyQt4 2.0 documentation</a> &raquo;</li> 
+             accesskey="P">předchozí</a> |</li>
+        <li><a href="index.html">Dokumentace pro PyQt4 0.2.1</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -51,27 +50,33 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="checkbox">
-<h1>CheckBox<a class="headerlink" href="#checkbox" title="Permalink to this headline">¶</a></h1>
-<p>CheckBox je velmi užitečný widget. Využívá se zejména pro zjištění, zdali si uživatel přečetl licenční podmínky nebo zjištění dvou a více informaci, které mohou nastat společně.</p>
+  <p>Zdorojové kódy: <a class="reference download internal" href="_downloads/CheckBox.py"><tt class="xref download docutils literal"><span class="pre">CheckBox.py</span></tt></a>.</p>
+<div class="section" id="checkbox">
+<span id="id1"></span><h1>CheckBox<a class="headerlink" href="#checkbox" title="Trvalý odkaz na tento nadpis">¶</a></h1>
+<p><tt class="docutils literal"><span class="pre">CheckBox</span></tt> je velmi užitečný widget. Využívá se zejména pro zjištění, zdali si
+uživatel přečetl licenční podmínky nebo zjištění dvou a více informaci, které
+mohou nastat společně.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">from</span> <span class="nn">PyQt4</span> <span class="kn">import</span> <span class="n">QtGui</span><span class="p">,</span><span class="n">QtCore</span>
 <span class="k">class</span> <span class="nc">Main_Window</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QWidget</span><span class="p">):</span>
-        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-                <span class="nb">super</span><span class="p">(</span><span class="n">Main_Window</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">setup_ui</span><span class="p">()</span>
-        <span class="k">def</span> <span class="nf">setup_ui</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">chk_box</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QCheckBox</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">chk_box</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;potvrdte&quot;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">=</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Main_Window</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup_ui</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">setup_ui</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chk_box</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QCheckBox</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chk_box</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;potvrdte&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">=</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">btn</span><span class="o">=</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="s">&quot;kliknete&quot;</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">btn</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chk_state</span><span class="p">)</span>
         <span class="n">btn</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">btn</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">())</span>
 </pre></div>
 </div>
-<p>První část textu zůstává jako obvykle stejná. V metodě setup_ui si jako první vytvoříme objekt chk_box pomocí konstruktoru QCheckBox(rodič).
-Poté nastavíme text, který se bude zobrazovat vedle widgetu pomocí metody setText(“text“). Pro zobrazení výzvy pro uživatele si vytvoříme jako v
-předchozím lbl objekt. Následně vytvoříme tlačítko s vazbou na metodu self.chk_state.</p>
+<p>První část textu zůstává jako obvykle stejná. V metodě <tt class="docutils literal"><span class="pre">setup_ui</span></tt> si jako
+první vytvoříme objekt <tt class="docutils literal"><span class="pre">chk_box</span></tt> pomocí konstruktoru <tt class="docutils literal"><span class="pre">QCheckBox(rodič)</span></tt>.
+Poté nastavíme text, který se bude zobrazovat vedle widgetu pomocí metody
+<tt class="docutils literal"><span class="pre">setText(text)</span></tt>. Pro zobrazení výzvy pro uživatele si vytvoříme jako v
+předchozím <tt class="docutils literal"><span class="pre">lbl</span></tt> objekt. Následně vytvoříme tlačítko s vazbou na metodu
+<tt class="docutils literal"><span class="pre">self.chk_state</span></tt>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">grid</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QGridLayout</span><span class="p">()</span>
 <span class="n">grid</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">grid</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chk_box</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
@@ -83,17 +88,25 @@ předchozím lbl objekt. Následně vytvoříme tlačítko s vazbou na metodu se
 </div>
 <p>Poslední část kódu je totožná, jako v předchozích příkladech.:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">chk_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">chk_box</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;klikl jste&quot;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">())</span>
-        <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;potvrdte tlacitko&quot;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">())</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">chk_box</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;klikl jste&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;potvrdte tlacitko&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lbl</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">())</span>
 </pre></div>
 </div>
-<p>Metoda chk_state obsahuje jednoduchou podmínku, ve které se ptáme stejně, jako v předchozím příkladu na stav widgetu. Dále podle stavu nastavíme odpovídající odpověď.</p>
+<p>Metoda <tt class="docutils literal"><span class="pre">chk_state</span></tt> obsahuje jednoduchou podmínku, ve které se ptáme stejně,
+jako v předchozím příkladu na stav widgetu. Dále podle stavu nastavíme
+odpovídající odpověď.</p>
 <img alt="_images/CheckBox.png" src="_images/CheckBox.png" />
 <img alt="_images/CheckBox-klik.png" src="_images/CheckBox-klik.png" />
+<div class="section" id="zdorojove-kody">
+<h2>Zdorojové kódy<a class="headerlink" href="#zdorojove-kody" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<ul class="simple">
+<li><a class="reference download internal" href="_downloads/CheckBox.py"><tt class="xref download docutils literal"><span class="pre">CheckBox.py</span></tt></a>.</li>
+</ul>
+</div>
 </div>
 
 
@@ -102,27 +115,38 @@ předchozím lbl objekt. Následně vytvoříme tlačítko s vazbou na metodu se
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Obsah</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">CheckBox</a><ul>
+<li><a class="reference internal" href="#zdorojove-kody">Zdorojové kódy</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Přechozí téma</h4>
   <p class="topless"><a href="Labe.html"
-                        title="previous chapter">Label</a></p>
-  <h4>Next topic</h4>
+                        title="předchozí kapitola">Label</a></p>
+  <h4>Další téma</h4>
   <p class="topless"><a href="RadioButton.html"
-                        title="next chapter">RadioButton</a></p>
-  <h3>This Page</h3>
+                        title="další kapitola">RadioButton</a></p>
+  <h3>Tato stránka</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/CheckBox.txt"
-           rel="nofollow">Show Source</a></li>
+           rel="nofollow">Ukázat zdroj</a></li>
   </ul>
 <div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
+  <h3>Rychlé vyhledávání</h3>
     <form class="search" action="search.html" method="get">
       <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <input type="submit" value="OK" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
     <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
+    Zadejte hledané termíny nebo jméno modulu, třídy či funkce.
     </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
@@ -131,23 +155,23 @@ předchozím lbl objekt. Následně vytvoříme tlačítko s vazbou na metodu se
       <div class="clearer"></div>
     </div>
     <div class="related">
-      <h3>Navigation</h3>
+      <h3>Navigace</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
+          <a href="genindex.html" title="Obecný rejstřík"
+             >rejstřík</a></li>
         <li class="right" >
           <a href="RadioButton.html" title="RadioButton"
-             >next</a> |</li>
+             >další</a> |</li>
         <li class="right" >
           <a href="Labe.html" title="Label"
-             >previous</a> |</li>
-        <li><a href="index.html">PyQt4 2.0 documentation</a> &raquo;</li> 
+             >předchozí</a> |</li>
+        <li><a href="index.html">Dokumentace pro PyQt4 0.2.1</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2015, Adam Obrtel.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Vytvořeno pomocí <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>

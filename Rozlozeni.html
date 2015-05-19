@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Rozvržení &mdash; Dokumentace pro PyQt4 0.2.1</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="Dokumentace pro PyQt4 0.2.1" href="index.html" />
+    <link rel="next" title="PushButton" href="PushButton.html" />
+    <link rel="prev" title="Vytvoření okna" href="Window.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigace</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Obecný rejstřík"
+             accesskey="I">rejstřík</a></li>
+        <li class="right" >
+          <a href="PushButton.html" title="PushButton"
+             accesskey="N">další</a> |</li>
+        <li class="right" >
+          <a href="Window.html" title="Vytvoření okna"
+             accesskey="P">předchozí</a> |</li>
+        <li><a href="index.html">Dokumentace pro PyQt4 0.2.1</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <p>Zdorojové kódy:
+<a class="reference download internal" href="_downloads/Grid.py"><tt class="xref download docutils literal"><span class="pre">Gryd.py</span></tt></a>,
+<a class="reference download internal" href="_downloads/BoxLayout.py"><tt class="xref download docutils literal"><span class="pre">BoxLayout.py</span></tt></a>,
+<a class="reference download internal" href="_downloads/Grid_Presah.py"><tt class="xref download docutils literal"><span class="pre">Grid_Presah.py</span></tt></a>.</p>
+<div class="section" id="rozvrzeni">
+<h1>Rozvržení<a class="headerlink" href="#rozvrzeni" title="Trvalý odkaz na tento nadpis">¶</a></h1>
+<p>Rozvržení je velmi užitečná věc. Ta nám umožňuje vytvořit dobře vypadající
+grafické rozhraní bez velké práce. V PyQt4 existují dva manažery rozvržení, což
+jsou <strong>Grid</strong> a <strong>BoxLayout</strong>. Nyní se podíváme jak je vytvořit.</p>
+<div class="section" id="grid">
+<h2>Grid<a class="headerlink" href="#grid" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<p>Grid je jeden z nejvíce užívaných rozvržení a to díky své jednoduchosti.
+Pracuje na základě sloupců a řádků do kterých umísťuje widgety. Díky této
+vlastnosti je pro programátora velmi snadné si představit jak bude výsledný
+program vypadat.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">PyQt4</span> <span class="kn">import</span> <span class="n">QtGui</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">class</span> <span class="nc">Ui</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QWidget</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Ui</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>První část kódu je stejná jako v prvním příkladu (<a class="reference internal" href="Window.html#window"><em>Vytvoření okna</em></a>). Tlačítko se
+vytvoří pomocí metody <tt class="docutils literal"><span class="pre">QPushButton()</span></tt> Je důležité, aby byl řetězec, neboť jak
+si později ukážeme (<a class="reference internal" href="PushButton.html#pushbutton"><em>PushButton</em></a>), tlačítka nejsou schopna přijmout čísla
+do svého názvu. Poté vytvoříme objekt <tt class="docutils literal"><span class="pre">grid</span></tt> za pomocí konstruktoru
+<tt class="docutils literal"><span class="pre">QGridLayout()</span></tt>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">grid</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QGridLayout</span><span class="p">()</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">tlacitka</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">radek</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">sloupec</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+            <span class="n">tlacitka</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)))</span>
+            <span class="n">grid</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">tlacitka</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">radek</span><span class="p">,</span> <span class="n">sloupec</span><span class="p">)</span>
+            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>V zanořených cyklech <tt class="docutils literal"><span class="pre">for</span></tt> vytvoříme seznam tlačítek, která umístíme pomocí
+metody <tt class="docutils literal"><span class="pre">addWidget(objekt,</span> <span class="pre">řádek,</span> <span class="pre">sloupec)</span></tt> do našeho rozvržení <tt class="docutils literal"><span class="pre">grid</span></tt>. Poté
+inkrementujeme j o jedna. Tato proměnná nám určuje počet již vytvořených
+tlačítek. Vytvoření tlačítek tímto způsobem je velmi výhodné, protože
+zpřehledňuje kód. Dále nastavíme našemu hlavnímu oknu rozvržení metodou
+setLayout(rozvržení) a potom jako obvykle okno zobrazíme.</p>
+<img alt="_images/Grid.png" src="_images/Grid.png" />
+</div>
+<div class="section" id="boxlayout">
+<h2>BoxLayout<a class="headerlink" href="#boxlayout" title="Trvalý odkaz na tento nadpis">¶</a></h2>
+<p>Toto rozvržení je velmi užitečné, neboť graficky rozdělí widgety do logických
+skupin. Tato vlastnost je zejména využitelná pro widgety jako <a class="reference internal" href="CheckBox.html#checkbox"><em>CheckBox</em></a>
+nebo <a class="reference internal" href="RadioButton.html#radiobutton"><em>RadioButton</em></a>. Existují dva typy <tt class="docutils literal"><span class="pre">BoxLayout</span></tt> a to vertikální a
+horizontální. Oba si nyní představíme.</p>
+<div class="section" id="horizontalni">
+<h3>Horizontální<a class="headerlink" href="#horizontalni" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">PyQt4</span> <span class="kn">import</span> <span class="n">QtGui</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">class</span> <span class="nc">Ui</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QWidget</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Ui</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">btn_ok_hor</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="s">&quot;ok&quot;</span><span class="p">,)</span>
+        <span class="n">btn_cancel_hor</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="s">&quot;cancel&quot;</span><span class="p">,)</span>
+        <span class="n">hbox</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QHBoxLayout</span><span class="p">()</span>
+        <span class="n">hbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">btn_ok_hor</span><span class="p">)</span>
+        <span class="n">hbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">btn_cancel_hor</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>První část kódu je stejná jako v předchozích příkladech a proto se jí nebudeme
+zabývat. Jako první si vytvoříme <tt class="docutils literal"><span class="pre">btn_ok_hor</span></tt> a <tt class="docutils literal"><span class="pre">btn_cancel_hor</span></tt> za pomocí
+kostruktoru <tt class="docutils literal"><span class="pre">QPushButton(text)</span></tt>. Blíže si povíme o tlačítkách v příštím
+příkladu (<a class="reference internal" href="PushButton.html#pushbutton"><em>PushButton</em></a>). Poté vytváříme za pomoci kostruktoru
+<tt class="docutils literal"><span class="pre">QHBoxLayout</span></tt> objekt <tt class="docutils literal"><span class="pre">hbox</span></tt>. Do tohoto rozvržení nasledně umístíme naše
+tlačítka pomocí metody addWidget(objekt).</p>
+</div>
+<div class="section" id="vertikalni">
+<h3>Vertikální<a class="headerlink" href="#vertikalni" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">btn_ok_ver</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="s">&quot;ok&quot;</span><span class="p">,)</span>
+<span class="n">btn_cancel_ver</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">(</span><span class="s">&quot;cancel&quot;</span><span class="p">,)</span>
+<span class="n">vbox</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QVBoxLayout</span><span class="p">()</span>
+<span class="n">vbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">btn_ok_ver</span><span class="p">)</span>
+<span class="n">vbox</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">btn_cancel_ver</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Stejně jako pro <tt class="docutils literal"><span class="pre">HBoxLayout</span></tt> vytvoříme dvě tlačítka, která poté přidáme za
+pomocí metody <tt class="docutils literal"><span class="pre">addWidget</span></tt> do našeho rozvržení. Zde jde krásně vidět, jak si
+jsou <tt class="docutils literal"><span class="pre">VBoxLayout</span></tt> a <tt class="docutils literal"><span class="pre">HBoxLayout</span></tt> podobné, neboť podporují podobné metody.</p>
+</div>
+<div class="section" id="id1">
+<h3>Grid<a class="headerlink" href="#id1" title="Trvalý odkaz na tento nadpis">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">grid</span><span class="o">=</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QGridLayout</span><span class="p">()</span>
+<span class="n">grid</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">vbox</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">grid</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">hbox</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">300</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>V poslední části kódu si vytvoříme objekt grid, který je vytvořen konstruktorem
+<tt class="docutils literal"><span class="pre">QGridLayout</span></tt>. Do tohoto rozvržení potom umístíme <tt class="docutils literal"><span class="pre">hbox</span></tt> a <tt class="docutils literal"><span class="pre">vbox</span></tt> pomocí
+metody <tt class="docutils literal"><span class="pre">addLayout(rozvržení)</span></tt>. Toto je nutné, neboť bychom nebyli schopni
+nastavit rozvržení pro hlavní okno, jelikož okno může mít pouze jedno
+rozvržení. Jako obvykle musíme okno zobrazit.</p>
+<img alt="_images/BoxLayout.png" src="_images/BoxLayout.png" />
+</div>
+</div>
+</div>
+<div class="section" id="zdorojove-kody">
+<h1>Zdorojové kódy<a class="headerlink" href="#zdorojove-kody" title="Trvalý odkaz na tento nadpis">¶</a></h1>
+<ul class="simple">
+<li><a class="reference download internal" href="_downloads/Grid.py"><tt class="xref download docutils literal"><span class="pre">Gryd.py</span></tt></a>.</li>
+<li><a class="reference download internal" href="_downloads/BoxLayout.py"><tt class="xref download docutils literal"><span class="pre">BoxLayout.py</span></tt></a>.</li>
+<li><a class="reference download internal" href="_downloads/Grid_Presah.py"><tt class="xref download docutils literal"><span class="pre">Grid_Presah.py</span></tt></a>.</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Obsah</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Rozvržení</a><ul>
+<li><a class="reference internal" href="#grid">Grid</a></li>
+<li><a class="reference internal" href="#boxlayout">BoxLayout</a><ul>
+<li><a class="reference internal" href="#horizontalni">Horizontální</a></li>
+<li><a class="reference internal" href="#vertikalni">Vertikální</a></li>
+<li><a class="reference internal" href="#id1">Grid</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#zdorojove-kody">Zdorojové kódy</a></li>
+</ul>
+
+  <h4>Přechozí téma</h4>
+  <p class="topless"><a href="Window.html"
+                        title="předchozí kapitola">Vytvoření okna</a></p>
+  <h4>Další téma</h4>
+  <p class="topless"><a href="PushButton.html"
+                        title="další kapitola">PushButton</a></p>
+  <h3>Tato stránka</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/Rozlozeni.txt"
+           rel="nofollow">Ukázat zdroj</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Rychlé vyhledávání</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="OK" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Zadejte hledané termíny nebo jméno modulu, třídy či funkce.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigace</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Obecný rejstřík"
+             >rejstřík</a></li>
+        <li class="right" >
+          <a href="PushButton.html" title="PushButton"
+             >další</a> |</li>
+        <li class="right" >
+          <a href="Window.html" title="Vytvoření okna"
+             >předchozí</a> |</li>
+        <li><a href="index.html">Dokumentace pro PyQt4 0.2.1</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Adam Obrtel.
+      Vytvořeno pomocí <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

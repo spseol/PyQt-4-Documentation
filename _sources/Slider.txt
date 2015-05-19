@@ -90,4 +90,4 @@ Podobně jako v minulé kapitole si reimplementujeme metodu paintEvent v ní za�
 
 	*	Nastaví rozsah pro slider, funguje stejně jako setMinimum a setMaximum.
 
-.. image:: 16.png
+.. image:: img/16.png

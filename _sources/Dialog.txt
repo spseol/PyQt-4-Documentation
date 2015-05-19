@@ -26,7 +26,7 @@ Na začátku si vytvoříme jednoduché okno, které bude obsahovat tlačítko, 
     else:
         self.dialog.close()
 
-Při zavolání metody exit_ se vytvoří metodou create_dialog() dialogové okno s názvem dialog. Z dialogu získáme návratovou hodnotu funkcí exec_ tato funkce může navracet hodnoty Accepted, což je logická jednička, nebo Rejected, což je logická nuda, nebo nějakou jinou hodnotu, například číslo zadané v dialogu uživatelem. V našem případě navrací tato metoda hodnotu Accepted, pokud si uživatel přeje okno vypnout, nebo Rejected, kdy se rozhodl okno nevypínat. Pří návratu Accepted, okno zavíráme pomocí metody close(). Při návratu hodnoty Rejected zavíráme tou samou metodou dialog. ::
+Při zavolání metody ``exit_`` se vytvoří metodou create_dialog() dialogové okno s názvem dialog. Z dialogu získáme návratovou hodnotu funkcí ``exec_`` tato funkce může navracet hodnoty Accepted, což je logická jednička, nebo Rejected, což je logická nuda, nebo nějakou jinou hodnotu, například číslo zadané v dialogu uživatelem. V našem případě navrací tato metoda hodnotu Accepted, pokud si uživatel přeje okno vypnout, nebo Rejected, kdy se rozhodl okno nevypínat. Pří návratu Accepted, okno zavíráme pomocí metody close(). Při návratu hodnoty Rejected zavíráme tou samou metodou dialog. ::
 
  def create_dialog(self):
         self.dialog=QtGui.QDialog(parent=self)
@@ -57,7 +57,7 @@ V metodě create_dialog si vytvoříme dialog pomocí konstruktoru QtGui.QDialog
 
 *	**dialog.done(int r)**
 	
-	*	zavře dialog a nastaví návratovou hodnotu na r, tato hodnota je navrácena metodou exec_
+	*	zavře dialog a nastaví návratovou hodnotu na r, tato hodnota je navrácena metodou ``exec_``
 
 *	**dialog.exec_()**
 
